@@ -28,7 +28,7 @@ steps:
 - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
   displayName: 'versionCode'
   inputs:
-    sourcePath: PwnedPasswords/PwnedPasswords.Android/Properties
+    sourcePath: PwnedPass2/PwnedPass2.Android/Properties
     filePattern: AndroidManifest.xml
     versionSource: variable
     customNumberVariable: Build.BuildId
@@ -41,7 +41,7 @@ steps:
 - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
   displayName: 'versionName'
   inputs:
-    sourcePath: PwnedPasswords/PwnedPasswords.Android/Properties
+    sourcePath: PwnedPass2/PwnedPass2.Android/Properties
     filePattern: AndroidManifest.xml
     versionSource: variable
     customNumberVariable: Build.BuildId
