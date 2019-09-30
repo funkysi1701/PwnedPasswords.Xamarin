@@ -72,7 +72,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: apk'
   inputs:
-    PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPasswords.Android-Signed.apk'
+    PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.apk'
     ArtifactName: APK
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: release notes'
