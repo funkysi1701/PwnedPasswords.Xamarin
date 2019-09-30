@@ -60,7 +60,7 @@ steps:
     msbuildArchitectureOption: x64
     jdkVersionOption: 1.8
 - powershell: |
-   $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2/PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
+   $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
    Write-host $temp
    $temp = $temp.name
    Write-host $temp
@@ -72,7 +72,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: apk'
   inputs:
-    PathtoPublish: 'PwnedPass2/PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPasswords.Android-Signed.apk'
+    PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPasswords.Android-Signed.apk'
     ArtifactName: APK
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: release notes'
