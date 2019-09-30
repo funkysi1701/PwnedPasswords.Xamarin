@@ -15,7 +15,7 @@ steps:
     secureFile: simon2.keystore
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: zipalign.bat
+    secureFile: zipalign2.bat
 - task: NuGetToolInstaller@0
   displayName: 'Install Nuget'
   inputs:
@@ -67,7 +67,7 @@ steps:
    Write-Output ("##vso[task.setvariable variable=AndroidVer;]$temp")
    Write-host $AndroidVer
   displayName: 'Set Android Version'
-- script: '$(Agent.TempDirectory)\zipalign.bat'
+- script: '$(Agent.TempDirectory)\zipalign2.bat'
   displayName: 'zipalign Script'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: apk'
