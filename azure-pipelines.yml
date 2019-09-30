@@ -23,12 +23,12 @@ steps:
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
   inputs:
-    restoreSolution: PwnedPasswords.sln
+    restoreSolution: PwnedPass2.sln
     restoreDirectory: packages
 - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
   displayName: 'versionCode'
   inputs:
-    sourcePath: PwnedPass2/PwnedPass2.Android/Properties
+    sourcePath: PwnedPass2.Android/Properties
     filePattern: AndroidManifest.xml
     versionSource: variable
     customNumberVariable: Build.BuildId
@@ -41,7 +41,7 @@ steps:
 - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
   displayName: 'versionName'
   inputs:
-    sourcePath: PwnedPass2/PwnedPass2.Android/Properties
+    sourcePath: PwnedPass2.Android/Properties
     filePattern: AndroidManifest.xml
     versionSource: variable
     customNumberVariable: Build.BuildId
@@ -54,7 +54,7 @@ steps:
 - task: XamarinAndroid@1
   displayName: 'Build Xamarin.Android'
   inputs:
-    projectFile: PwnedPass2/PwnedPass2.Android/PwnedPass2.Android.csproj
+    projectFile: PwnedPass2.Android/PwnedPass2.Android.csproj
     outputDirectory: '$(Build.Repository.LocalPath)/PwnedPass2/PwnedPass2.Android/bin/$(Parameters.configuration)'
     configuration: '$(Parameters.configuration)'
     msbuildArchitectureOption: x64
