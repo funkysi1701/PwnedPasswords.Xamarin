@@ -12,6 +12,7 @@ namespace PwnedPass2
     public partial class App : Application
     {
         public static IAPI GetAPI { get; private set; }
+        public static IHash GetHash { get; private set; }
 
         public App()
         {
@@ -24,6 +25,11 @@ namespace PwnedPass2
         public static void InitAPI(IAPI apiImplementation)
         {
             App.GetAPI = apiImplementation;
+        }
+
+        public static void InitHash(IHash hashImplementation)
+        {
+            App.GetHash = hashImplementation;
         }
 
         protected override void OnStart()

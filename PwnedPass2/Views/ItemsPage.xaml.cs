@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using PwnedPass2.Models;
 using PwnedPass2.Views;
 using PwnedPass2.ViewModels;
+using PwnedPass2.Interfaces;
 
 namespace PwnedPass2.Views
 {
@@ -25,6 +26,7 @@ namespace PwnedPass2.Views
             InitializeComponent();
 
             BindingContext = viewModel = new ItemsViewModel();
+            DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
