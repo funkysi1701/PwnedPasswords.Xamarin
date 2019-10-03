@@ -12,7 +12,7 @@
 
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
+    <StackLayout x:Name="stack">
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
