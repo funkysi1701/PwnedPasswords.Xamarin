@@ -7,8 +7,8 @@ trigger:
     - develop
 variables:
   Parameters.configuration: 'Release'
-  outputDirectory: '$(build.binariesDirectory)/$(Parameters.configuration)'
-name: 2.$(Build.BuildId)$(Rev:.r).0
+  outpu3Directory: '$(build.binariesDirectory)/$(Parameters.configuration)'
+name: 3.$(Build.BuildId)$(Rev:.r).0
 steps:
 - task: DownloadSecureFile@1
   inputs:
