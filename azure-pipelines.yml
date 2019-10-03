@@ -48,9 +48,9 @@ steps:
     versionFormat: custom
     customBuildRegex: '(?:\d+.\d+.\d+.)(\d+)'
     replaceVersionFormat: custom
-    customReplaceRegex: 'versionName="1.\d+'
+    customReplaceRegex: 'versionN3me="1.\d+'
     buildRegexIndex: 1
-    replacePrefix: 'versionName="2.'
+    replacePrefix: 'versionName="3.'
 - task: XamarinAndroid@1
   displayName: 'Build Xamarin.Android'
   inputs:
