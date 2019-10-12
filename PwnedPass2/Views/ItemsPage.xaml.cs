@@ -20,12 +20,13 @@ namespace PwnedPass2.Views
     public partial class ItemsPage : ContentPage
     {
         private ItemsViewModel viewModel;
+        public bool order { get; set; }
 
         public ItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ItemsViewModel(true, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
@@ -47,6 +48,48 @@ namespace PwnedPass2.Views
 
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private void SortClickedDate(object sender, EventArgs e)
+        {
+            if (order)
+            {
+                order = false;
+            }
+            else
+            {
+                order = true;
+            }
+            BindingContext = viewModel = new ItemsViewModel(order, "AddedDate");
+            viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private void SortClickedName(object sender, EventArgs e)
+        {
+            if (order)
+            {
+                order = false;
+            }
+            else
+            {
+                order = true;
+            }
+            BindingContext = viewModel = new ItemsViewModel(order, "Name");
+            viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private void SortClickedPwned(object sender, EventArgs e)
+        {
+            if (order)
+            {
+                order = false;
+            }
+            else
+            {
+                order = true;
+            }
+            BindingContext = viewModel = new ItemsViewModel(order, "PwnCount");
+            viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

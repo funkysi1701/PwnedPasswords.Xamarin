@@ -12,6 +12,9 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout x:Name="stack">
+        <Button x:Name="SortDate" Clicked="SortClickedDate" Text="Date" BackgroundColor="LightGreen"></Button>
+        <Button x:Name="SortName" Clicked="SortClickedName" Text="Name" BackgroundColor="LightGreen"></Button>
+        <Button x:Name="SortPwned" Clicked="SortClickedPwned" Text="Pwned Acc" BackgroundColor="LightGreen"></Button>
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"

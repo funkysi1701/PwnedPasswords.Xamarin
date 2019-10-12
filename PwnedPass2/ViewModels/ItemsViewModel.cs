@@ -15,14 +15,14 @@ namespace PwnedPass2.ViewModels
         public ObservableCollection<HIBPModel> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(bool order, string orderby)
         {
             Title = "';** pwned pass";
             Items = new ObservableCollection<HIBPModel>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby));
         }
 
-        private async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby)
         {
             if (IsBusy)
                 return;
@@ -32,7 +32,7 @@ namespace PwnedPass2.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync("AddedDate", true, true);
+                var items = await DataStore.GetItemsAsync(orderby, sortdir, true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
