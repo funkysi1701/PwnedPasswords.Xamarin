@@ -9,7 +9,6 @@
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
-
     </ContentPage.ToolbarItems>
 
     <StackLayout x:Name="stack">
@@ -36,21 +35,15 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Title}" 
+                            <Label Text="{Binding Title}"
                                 d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding PwnCount}" 
-                                d:Text="Item Count"
                                 LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                                Style="{DynamicResource ListItemTextStyle}"
+                                FontSize="16" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-
 </ContentPage>

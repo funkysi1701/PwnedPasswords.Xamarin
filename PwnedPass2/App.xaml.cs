@@ -6,6 +6,7 @@ using PwnedPass2.Views;
 using PwnedPass2.Interfaces;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
+using PwnedPass2.Models;
 
 namespace PwnedPass2
 {
@@ -13,6 +14,7 @@ namespace PwnedPass2
     {
         public static IAPI GetAPI { get; private set; }
         public static IHash GetHash { get; private set; }
+        private static Database database;
 
         public App()
         {
@@ -40,6 +42,19 @@ namespace PwnedPass2
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+        }
+
+        public static Database Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new Database();
+                }
+
+                return database;
+            }
         }
 
         protected override void OnResume()

@@ -17,7 +17,7 @@ namespace PwnedPass2.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Data Breaches";
+            Title = "';** pwned pass";
             Items = new ObservableCollection<HIBPModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
