@@ -8,7 +8,7 @@ trigger:
 variables:
   Parameters.configuration: 'Release'
   outputDirectory: '$(build.binariesDirectory)/$(Parameters.configuration)'
-name: 2.$(Build.BuildId)$(Rev:.r).0
+name: 3.$(Build.BuildId)$(Rev:.r).0
 steps:
 - task: DownloadSecureFile@1
   inputs:
@@ -48,9 +48,9 @@ steps:
     versionFormat: custom
     customBuildRegex: '(?:\d+.\d+.\d+.)(\d+)'
     replaceVersionFormat: custom
-    customReplaceRegex: 'versionName="1.\d+'
+    customReplaceRegex: 'versionName="3.\d+'
     buildRegexIndex: 1
-    replacePrefix: 'versionName="2.'
+    replacePrefix: 'versionName="3.'
 - task: XamarinAndroid@1
   displayName: 'Build Xamarin.Android'
   inputs:
