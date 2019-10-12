@@ -11,7 +11,7 @@ namespace PwnedPass2.Services
 {
     public class HIBPDataStore : IDataStore<HIBPModel>
     {
-        private readonly IList<HIBPModel> items;
+        public IEnumerable<HIBPModel> items;
 
         public HIBPDataStore()
         {
@@ -32,9 +32,18 @@ namespace PwnedPass2.Services
             return await Task.FromResult(items.FirstOrDefault(s => s.Name == id));
         }
 
-        public async Task<IEnumerable<HIBPModel>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<HIBPModel>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
+            items = OrderResults(items, orderby, orderdir);
             return await Task.FromResult(items);
+        }
+
+        public static IEnumerable<HIBPModel> OrderResults(IEnumerable<HIBPModel> items, string orderby, bool orderdir)
+        {
+            GenericSort<HIBPModel> gs = new GenericSort<HIBPModel>();
+            items = gs.Sort(items, orderby, orderdir).ToList();
+
+            return items;
         }
     }
 }

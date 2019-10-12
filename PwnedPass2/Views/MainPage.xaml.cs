@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PwnedPass2.Interfaces;
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,9 +11,25 @@ namespace PwnedPass2.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        private bool saveFirst = false;
+
         public MainPage()
         {
             InitializeComponent();
+            SaveData();
+        }
+
+        private void SaveData()
+        {
+            try
+            {
+                this.saveFirst = Cache.SaveData(this.saveFirst);
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<ILog>().SendTracking("Error");
+                DependencyService.Get<ILog>().SendTracking(ex.Message, ex);
+            }
         }
     }
 }

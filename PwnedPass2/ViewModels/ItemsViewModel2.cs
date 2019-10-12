@@ -10,12 +10,12 @@ using PwnedPass2.Views;
 
 namespace PwnedPass2.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel2 : BaseViewModel
     {
         public ObservableCollection<HIBPModel> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel2()
         {
             Title = "';** pwned pass";
             Items = new ObservableCollection<HIBPModel>();
@@ -32,7 +32,7 @@ namespace PwnedPass2.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync("AddedDate", true, true);
+                var items = await DataStore.GetItemsAsync("AddedDate", false, true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
