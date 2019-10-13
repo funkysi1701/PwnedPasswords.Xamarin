@@ -10,11 +10,21 @@
 
     <ContentPage.ToolbarItems>
     </ContentPage.ToolbarItems>
-
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS, Android, UWP">
+                <On.Value>
+                    5, 5, 5, 5
+                </On.Value>
+            </On>
+        </OnPlatform>
+    </ContentPage.Padding>
     <StackLayout x:Name="stack">
-        <Button x:Name="SortDate" Clicked="SortClickedDate" Text="Date" BackgroundColor="LightGreen"></Button>
-        <Button x:Name="SortName" Clicked="SortClickedName" Text="Name" BackgroundColor="LightGreen"></Button>
-        <Button x:Name="SortPwned" Clicked="SortClickedPwned" Text="Pwned Acc" BackgroundColor="LightGreen"></Button>
+        <StackLayout x:Name="horiz" Orientation="Horizontal">
+            <Button x:Name="SortDate" Clicked="SortClickedDate" Text="{Binding DateSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
+            <Button x:Name="SortName" Clicked="SortClickedName" Text="{Binding NameSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
+            <Button x:Name="SortPwned" Clicked="SortClickedPwned" Text="{Binding CountSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
+        </StackLayout>
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
