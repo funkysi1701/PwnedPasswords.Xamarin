@@ -17,6 +17,7 @@ namespace PwnedPass2.ViewModels
         public string DateSort { get; set; }
         public string NameSort { get; set; }
         public string CountSort { get; set; }
+        public string Breach { get; set; }
 
         public ItemsViewModel(bool order, string orderby)
         {
@@ -26,6 +27,12 @@ namespace PwnedPass2.ViewModels
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
+            Breach = SetBreach();
+        }
+
+        private string SetBreach()
+        {
+            return Page.GetBreach();
         }
 
         private void SetSort(bool order, string orderby)
