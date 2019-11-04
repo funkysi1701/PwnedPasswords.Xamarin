@@ -39,6 +39,22 @@ namespace PwnedPass2.Services
             return await Task.FromResult(items);
         }
 
+        public async Task<IEnumerable<HIBPModel>> GetPasswordAsync(string hash, string orderby, bool orderdir, bool forceRefresh = false)
+        {
+            string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
+            if (result != null && result.Length > 0)
+            {
+                var job = JsonConvert.DeserializeObject<HIBPResult>(result);
+                foreach (var item in job.HIBP)
+                {
+                    item.Description = Regex.Replace(item.Description.ToString().Replace("&quot;", "'"), "<.*?>", string.Empty);
+                }
+                emails = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
+            }
+            emails = OrderResults(emails, orderby, orderdir);
+            return await Task.FromResult(emails);
+        }
+
         public async Task<IEnumerable<HIBPModel>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
         {
             string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckEmail?email=" + emailsInp);

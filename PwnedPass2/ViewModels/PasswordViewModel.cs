@@ -10,24 +10,24 @@ using PwnedPass2.Views;
 
 namespace PwnedPass2.ViewModels
 {
-    public class EmailViewModel : BaseViewModel
+    public class PasswordViewModel : BaseViewModel
     {
-        public ObservableCollection<HIBPModel> Emails { get; set; }
-        public Command LoadEmailsCommand { get; set; }
+        public ObservableCollection<HIBPModel> Passwords { get; set; }
+        public Command LoadPasswordsCommand { get; set; }
 
-        public string EmailInput { get; set; }
+        public string PasswordInput { get; set; }
         public string DateSort { get; set; }
         public string NameSort { get; set; }
         public string CountSort { get; set; }
         public string Breach { get; set; }
         public string Account { get; set; }
 
-        public EmailViewModel(string EmailInp, bool order, string orderby)
+        public PasswordViewModel(string PasswordInp, bool order, string orderby)
         {
             Title = "';** pwned pass";
-            EmailInput = EmailInp;
-            Emails = new ObservableCollection<HIBPModel>();
-            LoadEmailsCommand = new Command(async () => await ExecuteLoadItemsCommand(EmailInput, order, orderby));
+            PasswordInput = PasswordInp;
+            Passwords = new ObservableCollection<HIBPModel>();
+            LoadPasswordsCommand = new Command(async () => await ExecuteLoadItemsCommand(PasswordInput, order, orderby));
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
@@ -94,7 +94,7 @@ namespace PwnedPass2.ViewModels
             }
         }
 
-        private async Task ExecuteLoadItemsCommand(string email, bool sortdir, string orderby)
+        private async Task ExecuteLoadItemsCommand(string password, bool sortdir, string orderby)
         {
             if (IsBusy)
                 return;
@@ -103,11 +103,12 @@ namespace PwnedPass2.ViewModels
 
             try
             {
-                Emails.Clear();
-                var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
+                Passwords.Clear();
+                string hash = App.GetHash.GetHash(password);
+                var items = await DataStore.GetPasswordAsync(hash, orderby, sortdir, true);
                 foreach (var item in items)
                 {
-                    Emails.Add(item);
+                    Passwords.Add(item);
                 }
             }
             catch (Exception ex)

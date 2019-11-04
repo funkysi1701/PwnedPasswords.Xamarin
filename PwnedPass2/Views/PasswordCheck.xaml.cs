@@ -17,18 +17,18 @@ namespace PwnedPass2.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class EmailCheck : ContentPage
+    public partial class PasswordCheck : ContentPage
     {
-        private EmailViewModel viewModel;
+        private PasswordViewModel viewModel;
         public bool order { get; set; }
 
-        public string EmailInp { get; set; }
+        public string PasswordInp { get; set; }
 
-        public EmailCheck()
+        public PasswordCheck()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new EmailViewModel(EmailInp, true, "AddedDate");
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp, true, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
@@ -48,8 +48,8 @@ namespace PwnedPass2.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Emails.Count == 0)
-                viewModel.LoadEmailsCommand.Execute(null);
+            if (viewModel.Passwords.Count == 0)
+                viewModel.LoadPasswordsCommand.Execute(null);
         }
 
         private void SortClickedDate(object sender, EventArgs e)
@@ -62,9 +62,9 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "AddedDate");
-            viewModel.LoadEmailsCommand.Execute(null);
-            emailEntry.Text = EmailInp;
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "AddedDate");
+            viewModel.LoadPasswordsCommand.Execute(null);
+            passwordEntry.Text = PasswordInp;
         }
 
         private void SortClickedName(object sender, EventArgs e)
@@ -77,9 +77,9 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "Name");
-            viewModel.LoadEmailsCommand.Execute(null);
-            emailEntry.Text = EmailInp;
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "Name");
+            viewModel.LoadPasswordsCommand.Execute(null);
+            passwordEntry.Text = PasswordInp;
         }
 
         private void SortClickedPwned(object sender, EventArgs e)
@@ -92,17 +92,17 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "PwnCount");
-            viewModel.LoadEmailsCommand.Execute(null);
-            emailEntry.Text = EmailInp;
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "PwnCount");
+            viewModel.LoadPasswordsCommand.Execute(null);
+            passwordEntry.Text = PasswordInp;
         }
 
         private void Entry_Completed(object sender, EventArgs e)
         {
-            EmailInp = emailEntry.Text;
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "AddedDate");
-            viewModel.LoadEmailsCommand.Execute(null);
-            emailEntry.Text = EmailInp;
+            PasswordInp = passwordEntry.Text;
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "AddedDate");
+            viewModel.LoadPasswordsCommand.Execute(null);
+            passwordEntry.Text = PasswordInp;
         }
     }
 }

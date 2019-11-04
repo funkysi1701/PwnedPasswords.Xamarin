@@ -11,5 +11,7 @@ namespace PwnedPass2.Services
         Task<IEnumerable<T>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false);
 
         Task<IEnumerable<T>> GetEmailsAsync(string email, string orderby, bool orderdir, bool forceRefresh = false);
+
+        Task<IEnumerable<T>> GetPasswordAsync(string hash, string orderby, bool orderdir, bool forceRefresh = false);
     }
 }

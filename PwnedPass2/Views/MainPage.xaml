@@ -28,5 +28,15 @@
                 <views:EmailCheck />
             </x:Arguments>
         </NavigationPage>
+        <NavigationPage Title="Password Check">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:PasswordCheck />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>
