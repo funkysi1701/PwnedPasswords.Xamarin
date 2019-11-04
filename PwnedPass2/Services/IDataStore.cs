@@ -9,5 +9,7 @@ namespace PwnedPass2.Services
         Task<T> GetItemAsync(string id);
 
         Task<IEnumerable<T>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false);
+
+        Task<IEnumerable<T>> GetEmailsAsync(string email, string orderby, bool orderdir, bool forceRefresh = false);
     }
 }
