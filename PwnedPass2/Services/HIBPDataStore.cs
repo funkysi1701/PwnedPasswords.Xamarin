@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace PwnedPass2.Services
 {
@@ -13,6 +14,7 @@ namespace PwnedPass2.Services
     {
         public IEnumerable<HIBPModel> items;
         public IEnumerable<HIBPModel> emails;
+        public string passwords;
 
         public HIBPDataStore()
         {
@@ -39,20 +41,37 @@ namespace PwnedPass2.Services
             return await Task.FromResult(items);
         }
 
-        public async Task<IEnumerable<HIBPModel>> GetPasswordAsync(string hash, string orderby, bool orderdir, bool forceRefresh = false)
+        private string GetCount(string output, string hash)
+        {
+            string[] lines = output.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string count = "0";
+            foreach (var item in lines)
+            {
+                if (item.Substring(0, 35) == hash.Substring(5))
+                {
+                    count = item.Substring(36);
+                }
+            }
+
+            return count;
+        }
+
+        public async Task<Passwords> GetPasswordAsync(string hash)
         {
             string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
-            if (result != null && result.Length > 0)
+            string count = this.GetCount(result, hash);
+            var passwords = new Passwords();
+            if (count == "0")
             {
-                var job = JsonConvert.DeserializeObject<HIBPResult>(result);
-                foreach (var item in job.HIBP)
-                {
-                    item.Description = Regex.Replace(item.Description.ToString().Replace("&quot;", "'"), "<.*?>", string.Empty);
-                }
-                emails = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
+                passwords.Text = "This password has not been indexed by haveibeenpwned.com";
+                passwords.BgColor = Color.Green;
             }
-            emails = OrderResults(emails, orderby, orderdir);
-            return await Task.FromResult(emails);
+            else
+            {
+                passwords.Text = "This password has previously appeared in a data breach " + count + " times and should never be used. ";
+                passwords.BgColor = Color.Red;
+            }
+            return await Task.FromResult(passwords);
         }
 
         public async Task<IEnumerable<HIBPModel>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)

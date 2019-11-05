@@ -20,7 +20,6 @@ namespace PwnedPass2.Views
     public partial class PasswordCheck : ContentPage
     {
         private PasswordViewModel viewModel;
-        public bool order { get; set; }
 
         public string PasswordInp { get; set; }
 
@@ -28,20 +27,8 @@ namespace PwnedPass2.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new PasswordViewModel(PasswordInp, true, "AddedDate");
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp);
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
-        }
-
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            var item = args.SelectedItem as HIBPModel;
-            if (item == null)
-                return;
-
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
-
-            // Manually deselect item.
-            ItemsListView.SelectedItem = null;
         }
 
         protected override void OnAppearing()
@@ -52,55 +39,10 @@ namespace PwnedPass2.Views
                 viewModel.LoadPasswordsCommand.Execute(null);
         }
 
-        private void SortClickedDate(object sender, EventArgs e)
-        {
-            if (order)
-            {
-                order = false;
-            }
-            else
-            {
-                order = true;
-            }
-            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "AddedDate");
-            viewModel.LoadPasswordsCommand.Execute(null);
-            passwordEntry.Text = PasswordInp;
-        }
-
-        private void SortClickedName(object sender, EventArgs e)
-        {
-            if (order)
-            {
-                order = false;
-            }
-            else
-            {
-                order = true;
-            }
-            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "Name");
-            viewModel.LoadPasswordsCommand.Execute(null);
-            passwordEntry.Text = PasswordInp;
-        }
-
-        private void SortClickedPwned(object sender, EventArgs e)
-        {
-            if (order)
-            {
-                order = false;
-            }
-            else
-            {
-                order = true;
-            }
-            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "PwnCount");
-            viewModel.LoadPasswordsCommand.Execute(null);
-            passwordEntry.Text = PasswordInp;
-        }
-
         private void Entry_Completed(object sender, EventArgs e)
         {
             PasswordInp = passwordEntry.Text;
-            BindingContext = viewModel = new PasswordViewModel(PasswordInp, order, "AddedDate");
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp);
             viewModel.LoadPasswordsCommand.Execute(null);
             passwordEntry.Text = PasswordInp;
         }

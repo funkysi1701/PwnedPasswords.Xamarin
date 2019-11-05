@@ -12,7 +12,7 @@ namespace PwnedPass2.ViewModels
 {
     public class PasswordViewModel : BaseViewModel
     {
-        public ObservableCollection<HIBPModel> Passwords { get; set; }
+        public ObservableCollection<Passwords> Passwords { get; set; }
         public Command LoadPasswordsCommand { get; set; }
 
         public string PasswordInput { get; set; }
@@ -22,79 +22,15 @@ namespace PwnedPass2.ViewModels
         public string Breach { get; set; }
         public string Account { get; set; }
 
-        public PasswordViewModel(string PasswordInp, bool order, string orderby)
+        public PasswordViewModel(string PasswordInp)
         {
             Title = "';** pwned pass";
             PasswordInput = PasswordInp;
-            Passwords = new ObservableCollection<HIBPModel>();
-            LoadPasswordsCommand = new Command(async () => await ExecuteLoadItemsCommand(PasswordInput, order, orderby));
-            SetSort(order, orderby);
-            SetSort(order, orderby);
-            SetSort(order, orderby);
-            Breach = SetBreach();
-            Account = SetAccount();
+            Passwords = new ObservableCollection<Passwords>();
+            LoadPasswordsCommand = new Command(async () => await ExecuteLoadItemsCommand(PasswordInput));
         }
 
-        private string SetAccount()
-        {
-            return Page.GetAccounts();
-        }
-
-        private string SetBreach()
-        {
-            return Page.GetBreach();
-        }
-
-        private void SetSort(bool order, string orderby)
-        {
-            if (orderby == "AddedDate")
-            {
-                if (order)
-                {
-                    DateSort = "^ Date";
-                    NameSort = "Name";
-                    CountSort = "Pwned Acc";
-                }
-                else
-                {
-                    DateSort = "v Date";
-                    NameSort = "Name";
-                    CountSort = "Pwned Acc";
-                }
-            }
-            if (orderby == "Name")
-            {
-                if (order)
-                {
-                    DateSort = "Date";
-                    NameSort = "^ Name";
-                    CountSort = "Pwned Acc";
-                }
-                else
-                {
-                    DateSort = "Date";
-                    NameSort = "v Name";
-                    CountSort = "Pwned Acc";
-                }
-            }
-            if (orderby == "PwnCount")
-            {
-                if (order)
-                {
-                    DateSort = "Date";
-                    NameSort = "Name";
-                    CountSort = "^ Pwned Acc";
-                }
-                else
-                {
-                    DateSort = "Date";
-                    NameSort = "Name";
-                    CountSort = "v Pwned Acc";
-                }
-            }
-        }
-
-        private async Task ExecuteLoadItemsCommand(string password, bool sortdir, string orderby)
+        private async Task ExecuteLoadItemsCommand(string password)
         {
             if (IsBusy)
                 return;
@@ -105,11 +41,8 @@ namespace PwnedPass2.ViewModels
             {
                 Passwords.Clear();
                 string hash = App.GetHash.GetHash(password);
-                var items = await DataStore.GetPasswordAsync(hash, orderby, sortdir, true);
-                foreach (var item in items)
-                {
-                    Passwords.Add(item);
-                }
+                var items = await DataStore.GetPasswordAsync(hash);
+                Passwords.Add(items);
             }
             catch (Exception ex)
             {
