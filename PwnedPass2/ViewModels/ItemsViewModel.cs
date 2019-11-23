@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using System.Linq;
 using Xamarin.Forms;
 
 using PwnedPass2.Models;
@@ -20,11 +20,11 @@ namespace PwnedPass2.ViewModels
         public string Breach { get; set; }
         public string Account { get; set; }
 
-        public ItemsViewModel(bool order, string orderby)
+        public ItemsViewModel(string filter, bool order, string orderby)
         {
             Title = "';** pwned pass";
             Items = new ObservableCollection<HIBPModel>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby));
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby, filter));
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
@@ -91,7 +91,7 @@ namespace PwnedPass2.ViewModels
             }
         }
 
-        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby)
+        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby, string filter)
         {
             if (IsBusy)
                 return;
@@ -102,6 +102,11 @@ namespace PwnedPass2.ViewModels
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(orderby, sortdir, true);
+                if (filter != null)
+                {
+                    items = items.Where(x => x.Title.Contains(filter) || x.Name.Contains(filter));
+                }
+
                 foreach (var item in items)
                 {
                     Items.Add(item);

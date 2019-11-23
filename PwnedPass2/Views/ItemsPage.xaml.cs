@@ -22,11 +22,13 @@ namespace PwnedPass2.Views
         private ItemsViewModel viewModel;
         public bool order { get; set; }
 
+        public string BreachInp { get; set; }
+
         public ItemsPage()
         {
             InitializeComponent();
-
-            BindingContext = viewModel = new ItemsViewModel(true, "AddedDate");
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, true, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
@@ -60,8 +62,10 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new ItemsViewModel(order, "AddedDate");
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "AddedDate");
             viewModel.LoadItemsCommand.Execute(null);
+            breachEntry.Text = BreachInp;
         }
 
         private void SortClickedName(object sender, EventArgs e)
@@ -74,8 +78,10 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new ItemsViewModel(order, "Name");
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "Name");
             viewModel.LoadItemsCommand.Execute(null);
+            breachEntry.Text = BreachInp;
         }
 
         private void SortClickedPwned(object sender, EventArgs e)
@@ -88,8 +94,18 @@ namespace PwnedPass2.Views
             {
                 order = true;
             }
-            BindingContext = viewModel = new ItemsViewModel(order, "PwnCount");
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "PwnCount");
             viewModel.LoadItemsCommand.Execute(null);
+            breachEntry.Text = BreachInp;
+        }
+
+        private void Entry_Completed(object sender, EventArgs e)
+        {
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "AddedDate");
+            viewModel.LoadItemsCommand.Execute(null);
+            breachEntry.Text = BreachInp;
         }
     }
 }

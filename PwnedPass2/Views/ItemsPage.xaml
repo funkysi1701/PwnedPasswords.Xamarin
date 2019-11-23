@@ -22,6 +22,7 @@
     <StackLayout x:Name="stack">
         <Label Text="{Binding Breach}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
         <Label Text="{Binding Account}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
+        <Entry Text="{Binding BreachInp}" x:Name="breachEntry"  Completed="Entry_Completed" Placeholder="Search Breach"></Entry>
         <StackLayout x:Name="horiz" Orientation="Horizontal">
             <Button x:Name="SortDate" Clicked="SortClickedDate" Text="{Binding DateSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
             <Button x:Name="SortName" Clicked="SortClickedName" Text="{Binding NameSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
