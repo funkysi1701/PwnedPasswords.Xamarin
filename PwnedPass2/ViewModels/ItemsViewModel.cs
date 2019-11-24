@@ -104,7 +104,7 @@ namespace PwnedPass2.ViewModels
                 var items = await DataStore.GetItemsAsync(orderby, sortdir, true);
                 if (filter != null)
                 {
-                    items = items.Where(x => x.Title.Contains(filter) || x.Name.Contains(filter));
+                    items = items.Where(x => x.Description.ToLower().Contains(filter.ToLower()) || x.Title.ToLower().Contains(filter.ToLower()) || x.Name.ToLower().Contains(filter.ToLower()));
                 }
 
                 foreach (var item in items)
