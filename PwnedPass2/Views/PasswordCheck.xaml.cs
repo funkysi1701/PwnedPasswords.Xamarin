@@ -46,5 +46,13 @@ namespace PwnedPass2.Views
             viewModel.LoadPasswordsCommand.Execute(null);
             passwordEntry.Text = PasswordInp;
         }
+
+        private void Search(object sender, EventArgs e)
+        {
+            PasswordInp = passwordEntry.Text;
+            BindingContext = viewModel = new PasswordViewModel(PasswordInp);
+            viewModel.LoadPasswordsCommand.Execute(null);
+            passwordEntry.Text = PasswordInp;
+        }
     }
 }

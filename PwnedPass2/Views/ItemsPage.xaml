@@ -22,7 +22,17 @@
     <StackLayout x:Name="stack">
         <Label Text="{Binding Breach}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
         <Label Text="{Binding Account}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
-        <Entry Text="{Binding BreachInp}" x:Name="breachEntry"  Completed="Entry_Completed" Placeholder="Search Breach"></Entry>
+        <Grid x:Name="searchgrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Entry Text="{Binding BreachInp}" x:Name="breachEntry"  Completed="Entry_Completed" Placeholder="Search Breach" Grid.Row="0" Grid.Column="0"></Entry>
+            <Button x:Name="submitsearch" Clicked="Search" Text="Go" BackgroundColor="LightBlue" Grid.Row="0" Grid.Column="1"></Button>
+        </Grid>
         <StackLayout x:Name="horiz" Orientation="Horizontal">
             <Button x:Name="SortDate" Clicked="SortClickedDate" Text="{Binding DateSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
             <Button x:Name="SortName" Clicked="SortClickedName" Text="{Binding NameSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>

@@ -20,7 +20,7 @@ namespace PwnedPass2.Views
     public partial class EmailCheck : ContentPage
     {
         private EmailViewModel viewModel;
-        public bool order { get; set; }
+        public bool Order { get; set; }
 
         public string EmailInp { get; set; }
 
@@ -34,8 +34,7 @@ namespace PwnedPass2.Views
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as HIBPModel;
-            if (item == null)
+            if (!(args.SelectedItem is HIBPModel item))
                 return;
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
@@ -54,45 +53,45 @@ namespace PwnedPass2.Views
 
         private void SortClickedDate(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "AddedDate");
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
 
         private void SortClickedName(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "Name");
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "Name");
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
 
         private void SortClickedPwned(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "PwnCount");
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "PwnCount");
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
@@ -100,7 +99,15 @@ namespace PwnedPass2.Views
         private void Entry_Completed(object sender, EventArgs e)
         {
             EmailInp = emailEntry.Text;
-            BindingContext = viewModel = new EmailViewModel(EmailInp, order, "AddedDate");
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
+        }
+
+        private void Search(object sender, EventArgs e)
+        {
+            EmailInp = emailEntry.Text;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }

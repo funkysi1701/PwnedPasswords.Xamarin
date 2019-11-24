@@ -20,7 +20,7 @@ namespace PwnedPass2.Views
     public partial class ItemsPage : ContentPage
     {
         private ItemsViewModel viewModel;
-        public bool order { get; set; }
+        public bool Order { get; set; }
 
         public string BreachInp { get; set; }
 
@@ -34,8 +34,7 @@ namespace PwnedPass2.Views
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as HIBPModel;
-            if (item == null)
+            if (!(args.SelectedItem is HIBPModel item))
                 return;
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
@@ -54,48 +53,48 @@ namespace PwnedPass2.Views
 
         private void SortClickedDate(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
             BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "AddedDate");
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
             viewModel.LoadItemsCommand.Execute(null);
             breachEntry.Text = BreachInp;
         }
 
         private void SortClickedName(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
             BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "Name");
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "Name");
             viewModel.LoadItemsCommand.Execute(null);
             breachEntry.Text = BreachInp;
         }
 
         private void SortClickedPwned(object sender, EventArgs e)
         {
-            if (order)
+            if (Order)
             {
-                order = false;
+                Order = false;
             }
             else
             {
-                order = true;
+                Order = true;
             }
             BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "PwnCount");
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "PwnCount");
             viewModel.LoadItemsCommand.Execute(null);
             breachEntry.Text = BreachInp;
         }
@@ -103,7 +102,15 @@ namespace PwnedPass2.Views
         private void Entry_Completed(object sender, EventArgs e)
         {
             BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, order, "AddedDate");
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
+            viewModel.LoadItemsCommand.Execute(null);
+            breachEntry.Text = BreachInp;
+        }
+
+        private void Search(object sender, EventArgs e)
+        {
+            BreachInp = breachEntry.Text;
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
             viewModel.LoadItemsCommand.Execute(null);
             breachEntry.Text = BreachInp;
         }
