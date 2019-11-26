@@ -54,11 +54,13 @@ steps:
 - task: XamarinAndroid@1
   displayName: 'Build Xamarin.Android'
   inputs:
-    projectFile: PwnedPass2.Android/PwnedPass2.Android.csproj
+    projectFile: 'PwnedPass2.Android/PwnedPass2.Android.csproj'
     outputDirectory: '$(Build.Repository.LocalPath)/PwnedPass2.Android/bin/$(Parameters.configuration)'
     configuration: '$(Parameters.configuration)'
-    msbuildArchitectureOption: x64
-    jdkVersionOption: 1.8
+    msbuildVersionOption: 'latest'
+    msbuildArchitectureOption: 'x64'
+    jdkOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
 - powershell: |
    $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
    Write-host $temp
