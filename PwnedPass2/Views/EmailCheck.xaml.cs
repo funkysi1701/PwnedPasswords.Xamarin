@@ -17,18 +17,18 @@ namespace PwnedPass2.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class ItemsPage : ContentPage
+    public partial class EmailCheck : ContentPage
     {
-        private ItemsViewModel viewModel;
+        private EmailViewModel viewModel;
         public bool Order { get; set; }
 
-        public string BreachInp { get; set; }
+        public string EmailInp { get; set; }
 
-        public ItemsPage()
+        public EmailCheck()
         {
             InitializeComponent();
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, true, "AddedDate");
+
+            BindingContext = viewModel = new EmailViewModel(EmailInp, true, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
@@ -47,8 +47,8 @@ namespace PwnedPass2.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            if (viewModel.Emails.Count == 0)
+                viewModel.LoadEmailsCommand.Execute(null);
         }
 
         private void SortClickedDate(object sender, EventArgs e)
@@ -61,10 +61,9 @@ namespace PwnedPass2.Views
             {
                 Order = true;
             }
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
         }
 
         private void SortClickedName(object sender, EventArgs e)
@@ -77,10 +76,9 @@ namespace PwnedPass2.Views
             {
                 Order = true;
             }
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "Name");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "Name");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
         }
 
         private void SortClickedPwned(object sender, EventArgs e)
@@ -93,26 +91,25 @@ namespace PwnedPass2.Views
             {
                 Order = true;
             }
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "PwnCount");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "PwnCount");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
         }
 
         private void Entry_Completed(object sender, EventArgs e)
         {
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
+            EmailInp = emailEntry.Text;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
         }
 
         private void Search(object sender, EventArgs e)
         {
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
+            EmailInp = emailEntry.Text;
+            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            viewModel.LoadEmailsCommand.Execute(null);
+            emailEntry.Text = EmailInp;
         }
     }
 }

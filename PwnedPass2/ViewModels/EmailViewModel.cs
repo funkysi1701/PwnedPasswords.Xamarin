@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Linq;
+
 using Xamarin.Forms;
 
 using PwnedPass2.Models;
@@ -10,21 +10,24 @@ using PwnedPass2.Views;
 
 namespace PwnedPass2.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class EmailViewModel : BaseViewModel
     {
-        public ObservableCollection<HIBPModel> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
+        public ObservableCollection<HIBPModel> Emails { get; set; }
+        public Command LoadEmailsCommand { get; set; }
+
+        public string EmailInput { get; set; }
         public string DateSort { get; set; }
         public string NameSort { get; set; }
         public string CountSort { get; set; }
         public string Breach { get; set; }
         public string Account { get; set; }
 
-        public ItemsViewModel(string filter, bool order, string orderby)
+        public EmailViewModel(string EmailInp, bool order, string orderby)
         {
             Title = "';** pwned pass";
-            Items = new ObservableCollection<HIBPModel>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby, filter));
+            EmailInput = EmailInp;
+            Emails = new ObservableCollection<HIBPModel>();
+            LoadEmailsCommand = new Command(async () => await ExecuteLoadItemsCommand(EmailInput, order, orderby));
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
@@ -91,7 +94,7 @@ namespace PwnedPass2.ViewModels
             }
         }
 
-        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby, string filter)
+        private async Task ExecuteLoadItemsCommand(string email, bool sortdir, string orderby)
         {
             if (IsBusy)
                 return;
@@ -100,16 +103,11 @@ namespace PwnedPass2.ViewModels
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(orderby, sortdir, true);
-                if (filter != null)
-                {
-                    items = items.Where(x => x.Description.ToLower().Contains(filter.ToLower()) || x.Title.ToLower().Contains(filter.ToLower()) || x.Name.ToLower().Contains(filter.ToLower()));
-                }
-
+                Emails.Clear();
+                var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    Emails.Add(item);
                 }
             }
             catch (Exception ex)

@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PwnedPass2.Views.ItemsPage"
+             x:Class="PwnedPass2.Views.EmailCheck"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
@@ -20,8 +20,6 @@
         </OnPlatform>
     </ContentPage.Padding>
     <StackLayout x:Name="stack">
-        <Label Text="{Binding Breach}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
-        <Label Text="{Binding Account}" FontAttributes="Bold" TextColor="Black" FontSize="Large"></Label>
         <Grid x:Name="searchgrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -30,7 +28,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Entry Text="{Binding BreachInp}" x:Name="breachEntry"  Completed="Entry_Completed" Placeholder="Search Breach" Grid.Row="0" Grid.Column="0"></Entry>
+            <Entry Text="{Binding EmailInp}" x:Name="emailEntry"  Completed="Entry_Completed" Placeholder="Search Email" Grid.Row="0" Grid.Column="0"></Entry>
             <Button x:Name="submitsearch" Clicked="Search" Text="Go" BackgroundColor="LightBlue" Grid.Row="0" Grid.Column="1"></Button>
         </Grid>
         <StackLayout x:Name="horiz" Orientation="Horizontal">
@@ -39,10 +37,10 @@
             <Button x:Name="SortPwned" Clicked="SortClickedPwned" Text="{Binding CountSort}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" ></Button>
         </StackLayout>
         <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
+                ItemsSource="{Binding Emails}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
+                RefreshCommand="{Binding LoadEmailsCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
