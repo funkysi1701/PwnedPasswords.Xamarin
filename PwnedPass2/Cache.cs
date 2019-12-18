@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace PwnedPass2
 {
-    public class Cache
+    public static class Cache
     {
         public static bool SaveData(bool runonce)
         {
