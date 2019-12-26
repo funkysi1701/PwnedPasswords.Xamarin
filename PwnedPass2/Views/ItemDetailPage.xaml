@@ -8,7 +8,6 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="{Binding Item.Title}" d:Text="Item name" FontSize="Large" TextColor="DarkBlue" FontAttributes="Bold" />
         <Label Text="{Binding Item.Domain}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
         <Label Text="{Binding Path=Item.PwnCount, StringFormat='{0:n0} pwned accounts'}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
         <Label Text="{Binding Path=Item.BreachDate, StringFormat='Breach Date {0:dd/MM/yy}'}" d:Text="Item name" FontSize="Medium" />

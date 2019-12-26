@@ -112,10 +112,6 @@ namespace PwnedPass2.ViewModels
                     Items.Add(item);
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
             finally
             {
                 IsBusy = false;

@@ -30,7 +30,10 @@ namespace PwnedPass2
                 DependencyService.Get<ILog>().SendTracking("Error");
                 DependencyService.Get<ILog>().SendTracking(e.Message, e);
             }
-
+            if (count == 0)
+            {
+                count = Cache.GetBreach();
+            }
             return count.ToString() + " data breaches";
         }
 
@@ -67,6 +70,10 @@ namespace PwnedPass2
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Accounts from Cache");
             long count = GetAccountsRaw();
+            if (count == 0)
+            {
+                count = Cache.GetAccounts();
+            }
             return string.Format("{0:n0}", count) + " pwned accounts";
         }
     }
