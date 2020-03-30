@@ -105,6 +105,7 @@ namespace PwnedPass2.ViewModels
             {
                 Emails.Clear();
                 var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
+                SaveLastEmail(email);
                 foreach (var item in items)
                 {
                     Emails.Add(item);
@@ -117,6 +118,23 @@ namespace PwnedPass2.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private void SaveLastEmail(string email)
+        {
+            try
+            {
+                var last = new LastEmail
+                {
+                    Email = email
+                };
+                Database d = new Database();
+                d.SaveLastEmail(last);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
             }
         }
     }
