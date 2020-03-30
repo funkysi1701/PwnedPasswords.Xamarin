@@ -17,9 +17,9 @@ steps:
   inputs:
     secureFile: zipalign2.bat
 - script: '(echo $(Build.BuildNumber) && echo $(Build.BuildId)) > .buildinfo.json'
-    displayName: "Emit build number"
-    workingDirectory: '$(Build.SourcesDirectory)/PwnedPass2'
-    failOnStderr: true
+  displayName: 'Emit build number'
+  workingDirectory: '$(Build.SourcesDirectory)/PwnedPass2'
+  failOnStderr: true
 - task: NuGetToolInstaller@0
   displayName: 'Install Nuget'
   inputs:
