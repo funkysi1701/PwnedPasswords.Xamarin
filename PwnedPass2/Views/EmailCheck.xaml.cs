@@ -20,12 +20,12 @@ namespace PwnedPass2.Views
         public EmailCheck()
         {
             InitializeComponent();
+            BindingContext = viewModel = new EmailViewModel(EmailInp, true, "AddedDate");
             var lastemail = viewModel.LoadLastEmail();
             if (!string.IsNullOrEmpty(lastemail.Email))
             {
                 EmailInp = lastemail.Email;
             }
-            BindingContext = viewModel = new EmailViewModel(EmailInp, true, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
