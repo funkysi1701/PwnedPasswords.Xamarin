@@ -124,10 +124,10 @@ namespace PwnedPass2.ViewModels
             {
                 var last = new LastEmail
                 {
-                    Email = email
+                    Email = email,
+                    Id = 1
                 };
-                Database d = new Database();
-                d.SaveLastEmail(last);
+                App.Database.SaveLastEmail(last);
             }
             catch (Exception e)
             {
@@ -139,8 +139,7 @@ namespace PwnedPass2.ViewModels
         {
             try
             {
-                Database d = new Database();
-                return d.GetLastEmail();
+                return App.Database.GetLastEmail();
             }
             catch (Exception e)
             {
