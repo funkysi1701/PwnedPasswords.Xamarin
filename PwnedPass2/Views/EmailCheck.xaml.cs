@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
-using PwnedPass2.Views;
 using PwnedPass2.ViewModels;
-using PwnedPass2.Interfaces;
+using System;
+using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace PwnedPass2.Views
 {
@@ -27,8 +20,13 @@ namespace PwnedPass2.Views
         public EmailCheck()
         {
             InitializeComponent();
-
             BindingContext = viewModel = new EmailViewModel(EmailInp, true, "AddedDate");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email))
+            {
+                EmailInp = lastemail.Email;
+                emailEntry.Text = EmailInp;
+            }
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
@@ -62,6 +60,11 @@ namespace PwnedPass2.Views
                 Order = true;
             }
             BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
+            {
+                EmailInp = lastemail.Email;
+            }
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
@@ -77,6 +80,11 @@ namespace PwnedPass2.Views
                 Order = true;
             }
             BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "Name");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
+            {
+                EmailInp = lastemail.Email;
+            }
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
@@ -92,6 +100,11 @@ namespace PwnedPass2.Views
                 Order = true;
             }
             BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "PwnCount");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
+            {
+                EmailInp = lastemail.Email;
+            }
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
@@ -100,6 +113,11 @@ namespace PwnedPass2.Views
         {
             EmailInp = emailEntry.Text;
             BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
+            {
+                EmailInp = lastemail.Email;
+            }
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
@@ -108,6 +126,11 @@ namespace PwnedPass2.Views
         {
             EmailInp = emailEntry.Text;
             BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
+            var lastemail = viewModel.LoadLastEmail();
+            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
+            {
+                EmailInp = lastemail.Email;
+            }
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }

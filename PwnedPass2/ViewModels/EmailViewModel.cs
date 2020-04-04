@@ -1,12 +1,9 @@
-﻿using System;
+﻿using PwnedPass2.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
-using PwnedPass2.Models;
-using PwnedPass2.Views;
 
 namespace PwnedPass2.ViewModels
 {
@@ -105,6 +102,7 @@ namespace PwnedPass2.ViewModels
             {
                 Emails.Clear();
                 var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
+                SaveLastEmail(email);
                 foreach (var item in items)
                 {
                     Emails.Add(item);
@@ -117,6 +115,36 @@ namespace PwnedPass2.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private void SaveLastEmail(string email)
+        {
+            try
+            {
+                var last = new LastEmail
+                {
+                    Email = email,
+                    Id = 1
+                };
+                App.Database.SaveLastEmail(last);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+        }
+
+        public LastEmail LoadLastEmail()
+        {
+            try
+            {
+                return App.Database.GetLastEmail();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return new LastEmail();
             }
         }
     }

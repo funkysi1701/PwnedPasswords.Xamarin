@@ -104,12 +104,12 @@ namespace PwnedPass2.Models
             }
         }
 
-        public IEnumerable<LastEmail> GetLastEmail()
+        public LastEmail GetLastEmail()
         {
             lock (Locker)
             {
                 return (from c in this.database.Table<LastEmail>()
-                        select c).ToList();
+                        select c).FirstOrDefault();
             }
         }
     }
