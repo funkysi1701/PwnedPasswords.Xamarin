@@ -30,7 +30,6 @@ namespace PwnedPass2.Droid
             var details = new Dictionary<string, string>
                 {
                         { "VersionName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionName },
-                        { "VersionCode", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionCode.ToString() },
                         { "LastUpdateTime", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).LastUpdateTime.ToString() },
                         { "PackageName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).PackageName },
                 };
@@ -48,7 +47,6 @@ namespace PwnedPass2.Droid
             var details = new Dictionary<string, string>
                 {
                         { "VersionName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionName },
-                        { "VersionCode", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionCode.ToString() },
                         { "LastUpdateTime", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).LastUpdateTime.ToString() },
                         { "PackageName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).PackageName },
                         { "StackTrace", e.StackTrace },
