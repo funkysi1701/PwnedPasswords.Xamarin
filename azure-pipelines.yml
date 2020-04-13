@@ -5,6 +5,7 @@ trigger:
   branches:
     include:
     - develop
+    - master
 variables:
   Parameters.configuration: 'Release'
   outputDirectory: '$(build.binariesDirectory)/$(Parameters.configuration)'
