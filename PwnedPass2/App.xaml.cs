@@ -1,12 +1,10 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using PwnedPass2.Interfaces;
+using PwnedPass2.Models;
 using PwnedPass2.Services;
 using PwnedPass2.Views;
-using PwnedPass2.Interfaces;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using PwnedPass2.Models;
+using Xamarin.Forms;
 
 namespace PwnedPass2
 {

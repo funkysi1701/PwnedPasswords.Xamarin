@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
-using PwnedPass2.Views;
 using PwnedPass2.ViewModels;
-using PwnedPass2.Interfaces;
+using System;
+using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace PwnedPass2.Views
 {

@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PwnedPass2.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using PwnedPass2.Interfaces;
 
 namespace PwnedPass2.Droid
 {

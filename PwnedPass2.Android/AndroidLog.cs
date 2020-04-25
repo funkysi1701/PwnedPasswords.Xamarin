@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Microsoft.AppCenter.Analytics;
+﻿using Microsoft.AppCenter.Analytics;
 using Plugin.CurrentActivity;
 using PwnedPass2.Interfaces;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(PwnedPass2.Droid.AndroidLog))]

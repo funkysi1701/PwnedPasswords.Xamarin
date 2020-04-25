@@ -2,8 +2,6 @@
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 

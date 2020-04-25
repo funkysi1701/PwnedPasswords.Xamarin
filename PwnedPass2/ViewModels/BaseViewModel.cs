@@ -1,12 +1,10 @@
-﻿using System;
+﻿using PwnedPass2.Models;
+using PwnedPass2.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
-using PwnedPass2.Models;
-using PwnedPass2.Services;
 
 namespace PwnedPass2.ViewModels
 {
@@ -31,7 +29,7 @@ namespace PwnedPass2.ViewModels
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
+            [CallerMemberName] string propertyName = "",
             Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))

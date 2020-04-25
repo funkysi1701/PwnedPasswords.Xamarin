@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PwnedPass2.Views
 {

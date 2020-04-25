@@ -1,6 +1,4 @@
-﻿using System;
-
-using PwnedPass2.Models;
+﻿using PwnedPass2.Models;
 
 namespace PwnedPass2.ViewModels
 {
