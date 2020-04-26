@@ -101,11 +101,14 @@ namespace PwnedPass2.ViewModels
             try
             {
                 Emails.Clear();
-                var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
-                SaveLastEmail(email);
-                foreach (var item in items)
+                if(email != null)
                 {
-                    Emails.Add(item);
+                    var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
+                    SaveLastEmail(email);
+                    foreach (var item in items)
+                    {
+                        Emails.Add(item);
+                    }
                 }
             }
             catch (Exception ex)
