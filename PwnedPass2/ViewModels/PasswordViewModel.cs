@@ -1,5 +1,4 @@
-﻿using PwnedPass2.Interfaces;
-using PwnedPass2.Models;
+﻿using PwnedPass2.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -42,10 +41,9 @@ namespace PwnedPass2.ViewModels
                 var items = await DataStore.GetPasswordAsync(hash);
                 Passwords.Add(items);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                DependencyService.Get<ILog>().SendTracking("Error");
-                DependencyService.Get<ILog>().SendTracking(e.Message, e);
+                Debug.WriteLine(ex);
             }
             finally
             {
