@@ -74,14 +74,13 @@ namespace PwnedPass2.Models
         {
             lock (Locker)
             {
-                if (lastemail.Id != 0)
-                {
-                    this.database.Update(lastemail);
-                    return lastemail.Id;
-                }
-                else
+                try
                 {
                     return this.database.Insert(lastemail);
+                }
+                catch
+                {
+                    return this.database.Update(lastemail);
                 }
             }
         }
