@@ -40,8 +40,8 @@ namespace PwnedPass2.Droid
                         { "VersionName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionName },
                         { "LastUpdateTime", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).LastUpdateTime.ToString() },
                         { "PackageName", crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).PackageName },
-                        { "StackTrace", e.StackTrace },
-                        { "Revision", e.InnerException.Message },
+                        { "StackTrace", e?.StackTrace },
+                        { "Revision", e?.InnerException?.Message },
                 };
             Analytics.TrackEvent(message, details);
         }

@@ -1,4 +1,5 @@
-﻿using PwnedPass2.Models;
+﻿using PwnedPass2.Interfaces;
+using PwnedPass2.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -113,7 +114,8 @@ namespace PwnedPass2.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                DependencyService.Get<ILog>().SendTracking("Error");
+                DependencyService.Get<ILog>().SendTracking(ex.Message, ex);
             }
             finally
             {
@@ -134,7 +136,8 @@ namespace PwnedPass2.ViewModels
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                DependencyService.Get<ILog>().SendTracking("Error");
+                DependencyService.Get<ILog>().SendTracking(e.Message, e);
             }
         }
 
@@ -146,7 +149,8 @@ namespace PwnedPass2.ViewModels
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                DependencyService.Get<ILog>().SendTracking("Error");
+                DependencyService.Get<ILog>().SendTracking(e.Message, e);
                 return new LastEmail();
             }
         }
