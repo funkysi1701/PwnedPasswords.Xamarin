@@ -88,7 +88,7 @@ stages:
     - task: CmdLine@2
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
       inputs:
-        script: "echo '$(Build.SourceVersionMessage)'  > $(Build.Repository.LocalPath)\release.txt"        
+        script: echo '$(Build.SourceVersionMessage)' > $(Build.Repository.LocalPath)\release.txt       
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: release notes'
       inputs:
