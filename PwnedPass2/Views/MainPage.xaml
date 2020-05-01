@@ -8,16 +8,6 @@
             x:Class="PwnedPass2.Views.MainPage">
 
     <TabbedPage.Children>
-        <NavigationPage Title="Data Breaches">
-            <x:Arguments>
-                <views:ItemsPage />
-            </x:Arguments>
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png" />
-                </OnPlatform>
-            </NavigationPage.Icon>
-        </NavigationPage>
         <NavigationPage Title="Email Check">
             <x:Arguments>
                 <views:EmailCheck />
@@ -31,6 +21,16 @@
         <NavigationPage Title="Password Check">
             <x:Arguments>
                 <views:PasswordCheck />
+            </x:Arguments>
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+        </NavigationPage>
+        <NavigationPage Title="Data Breaches">
+            <x:Arguments>
+                <views:ItemsPage />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
