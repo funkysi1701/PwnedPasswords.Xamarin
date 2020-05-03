@@ -107,5 +107,10 @@ namespace PwnedPass2.Views
             viewModel.LoadItemsCommand.Execute(null);
             breachEntry.Text = BreachInp;
         }
+
+        public async void Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
     }
 }

@@ -46,5 +46,10 @@ namespace PwnedPass2.Views
             viewModel.LoadPasswordsCommand.Execute(null);
             passwordEntry.Text = PasswordInp;
         }
+
+        public async void Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
     }
 }

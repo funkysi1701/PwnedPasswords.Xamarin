@@ -12,58 +12,46 @@ namespace PwnedPass2.Droid
         public void AddFooter(ItemsPage mainPage, StackLayout stack)
         {
             var context = CrossCurrentActivity.Current.Activity;
-            var versioncode = new Label
+            var about = new Button
             {
-                Text = " Version: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
+                Text = "  ';** Pwned Pass created by Simon Foster. \r\nVersion: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
                 TextColor = Color.Black,
+                BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
             };
-            var about = new Label
-            {
-                Text = "  ';** Pwned Pass created by Simon Foster.",
-                TextColor = Color.Black,
-                FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
-            };
+
+            about.Clicked += mainPage.Clicked;
             stack.Children.Add(about);
-            stack.Children.Add(versioncode);
         }
 
         public void AddFooter(EmailCheck mainPage, StackLayout stack)
         {
             var context = CrossCurrentActivity.Current.Activity;
-            var versioncode = new Label
+            var about = new Button
             {
-                Text = " Version: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
+                Text = "  ';** Pwned Pass created by Simon Foster. \r\nVersion: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
                 TextColor = Color.Black,
+                BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
             };
-            var about = new Label
-            {
-                Text = "  ';** Pwned Pass created by Simon Foster.",
-                TextColor = Color.Black,
-                FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
-            };
+
+            about.Clicked += mainPage.Clicked;
             stack.Children.Add(about);
-            stack.Children.Add(versioncode);
         }
 
         public void AddFooter(PasswordCheck mainPage, StackLayout stack)
         {
             var context = CrossCurrentActivity.Current.Activity;
-            var versioncode = new Label
+            var about = new Button
             {
-                Text = " Version: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
+                Text = "  ';** Pwned Pass created by Simon Foster. \r\nVersion: " + context.PackageManager.GetPackageInfo(context.PackageName, 0).VersionName,
                 TextColor = Color.Black,
+                BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
             };
-            var about = new Label
-            {
-                Text = "  ';** Pwned Pass created by Simon Foster.",
-                TextColor = Color.Black,
-                FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
-            };
+
+            about.Clicked += mainPage.Clicked;
             stack.Children.Add(about);
-            stack.Children.Add(versioncode);
         }
     }
 }

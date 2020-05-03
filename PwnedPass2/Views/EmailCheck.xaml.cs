@@ -134,5 +134,10 @@ namespace PwnedPass2.Views
             viewModel.LoadEmailsCommand.Execute(null);
             emailEntry.Text = EmailInp;
         }
+
+        public async void Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new About());
+        }
     }
 }
