@@ -69,7 +69,6 @@ stages:
         msbuildVersionOption: 'latest'
         msbuildArchitectureOption: 'x64'
         jdkOption: 'JDKVersion'
-        jdkVersionOption: '1.8'
     - powershell: |
         $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
         Write-host $temp
