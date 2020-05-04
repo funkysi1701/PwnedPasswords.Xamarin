@@ -29,18 +29,16 @@ namespace PwnedPass2.ViewModels
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
-            Breach = SetBreach();
-            Account = SetAccount();
         }
 
-        private string SetAccount()
+        private async Task<string> SetAccount()
         {
-            return Page.GetAccounts();
+            return await Page.GetAccounts();
         }
 
-        private string SetBreach()
+        private async Task<string> SetBreach()
         {
-            return Page.GetBreach();
+            return await Page.GetBreach();
         }
 
         private void SetSort(bool order, string orderby)
@@ -101,6 +99,8 @@ namespace PwnedPass2.ViewModels
 
             try
             {
+                Breach = await SetBreach();
+                Account = await SetAccount();
                 Emails.Clear();
                 if(email != null)
                 {

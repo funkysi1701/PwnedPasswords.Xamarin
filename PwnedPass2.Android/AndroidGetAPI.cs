@@ -2,6 +2,7 @@
 using PwnedPass2.Interfaces;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace PwnedPass2.Droid
@@ -34,12 +35,12 @@ namespace PwnedPass2.Droid
         /// </summary>
         /// <param name="url">url goes here.</param>
         /// <returns>string.</returns>
-        public string GetHIBP(string url)
+        public async Task<string> GetHIBP(string url)
         {
             try
             {
                 HttpResponseMessage response = this.GetAsyncAPI(url);
-                return response.Content.ReadAsStringAsync().Result;
+                return await response.Content.ReadAsStringAsync();
             }
             catch (Exception e)
             {

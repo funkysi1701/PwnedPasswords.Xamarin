@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PwnedPass2.Interfaces
 {
@@ -9,7 +10,7 @@ namespace PwnedPass2.Interfaces
         /// </summary>
         /// <param name="url">url.</param>
         /// <returns>Task string.</returns>
-        string GetHIBP(string url);
+        Task<string> GetHIBP(string url);
 
         /// <summary>
         /// GetAsyncAPI.

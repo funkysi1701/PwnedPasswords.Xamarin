@@ -26,7 +26,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBPModel>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
+            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);
@@ -57,7 +57,7 @@ namespace PwnedPass2.Services
 
         public async Task<Passwords> GetPasswordAsync(string hash)
         {
-            string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
+            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
             string count = this.GetCount(result, hash);
             var passwords = new Passwords();
             if (count == "0")
@@ -75,7 +75,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBPModel>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckEmail?email=" + emailsInp);
+            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckEmail?email=" + emailsInp);
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);

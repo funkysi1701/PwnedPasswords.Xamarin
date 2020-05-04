@@ -1,5 +1,6 @@
 ﻿using PwnedPass2.Interfaces;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace PwnedPass2
@@ -10,7 +11,7 @@ namespace PwnedPass2
         /// GetBreach
         /// </summary>
         /// <returns>string</returns>
-        public static string GetBreach()
+        public static async Task<string> GetBreach()
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Breaches from Cache");
             int count = 0;
@@ -18,10 +19,7 @@ namespace PwnedPass2
             {
                 var table = App.Database.GetHIBP();
 
-                foreach (var s in table)
-                {
-                    count = s.TotalBreaches;
-                }
+                count = table.TotalBreaches;
             }
             catch (Exception e)
             {
@@ -30,7 +28,7 @@ namespace PwnedPass2
             }
             if (count == 0)
             {
-                count = Cache.GetBreach();
+                count = await Cache.GetBreach();
             }
             return count.ToString() + " data breaches";
         }
@@ -46,10 +44,7 @@ namespace PwnedPass2
             {
                 var table = App.Database.GetHIBP();
 
-                foreach (var s in table)
-                {
-                    count = s.TotalAccounts;
-                }
+                count = table.TotalAccounts;
             }
             catch (Exception e)
             {
@@ -64,13 +59,13 @@ namespace PwnedPass2
         /// GetAccounts
         /// </summary>
         /// <returns>string</returns>
-        public static string GetAccounts()
+        public static async Task<string> GetAccounts()
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Accounts from Cache");
             long count = GetAccountsRaw();
             if (count == 0)
             {
-                count = Cache.GetAccounts();
+                count = await Cache.GetAccounts();
             }
             return string.Format("{0:n0}", count) + " pwned accounts";
         }

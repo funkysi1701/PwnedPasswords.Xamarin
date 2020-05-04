@@ -44,12 +44,12 @@ namespace PwnedPass2.Models
             this.database.CreateTable<DataBreach>();
         }
 
-        public IEnumerable<HIBP> GetHIBP()
+        public HIBP GetHIBP()
         {
             lock (Locker)
             {
                 return (from c in this.database.Table<HIBP>()
-                        select c).ToList();
+                        select c).FirstOrDefault();
             }
         }
 
