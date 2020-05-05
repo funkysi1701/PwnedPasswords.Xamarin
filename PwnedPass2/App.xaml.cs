@@ -17,7 +17,7 @@ namespace PwnedPass2
         public static IHash GetHash { get; private set; }
         private static Database database;
         private static Stopwatch stopWatch = new Stopwatch();
-        private const int defaultTimespan = 5;
+        private const int defaultTimespan = 35;
 
         public App()
         {
@@ -52,7 +52,10 @@ namespace PwnedPass2
                 if (stopWatch.IsRunning && stopWatch.Elapsed.Minutes >= defaultTimespan)
                 {
                     //prepare to perform your data pull here as we have hit the 1 minute mark   
-                    Cache.SaveData();
+                    Task.Run(async () =>
+                    {
+                        Cache.SaveData();
+                    });
                     // Perform your long running operations here.
 
                     Xamarin.Forms.Device.InvokeOnMainThreadAsync(() => {

@@ -19,7 +19,58 @@
     </ContentPage.Padding>
     <ContentPage.Content>
       <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
+            <Label Text="About" FontSize="Large" TextColor="Black"></Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Pwned Pass allows you to search the database of " FontSize="Medium"/>
+                        <Span Text="haveibeenpwned.com"
+                              FontSize="Medium"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                          CommandParameter="https://haveibeenpwned.com/" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=" for a list of accounts (or email addresses) that have been leaked in a data breach that was exposed to the internet. " FontSize="Medium" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Have I Been Pwned was created by " FontSize="Medium" />
+                        <Span Text="Troy Hunt"
+                              FontSize="Medium"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                          CommandParameter="https://www.troyhunt.com/" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=". " FontSize="Medium"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Pwned Pass was created by " FontSize="Medium" />
+                        <Span Text="Simon Foster"
+                              FontSize="Medium"
+                              TextColor="Blue"
+                              TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                          CommandParameter="https://dev.funkysi1701.com/" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text=", who is a Developer working in the North of England. He has been working in IT departments for over 13 years and has a wide range of experiences. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Medium" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
   </ContentPage.Content>
 </ContentPage>
