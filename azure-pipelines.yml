@@ -84,10 +84,11 @@ stages:
       inputs:
         PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.apk'
         ArtifactName: APK
-    - task: CmdLine@2
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
+    - task: PowerShell@2
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
       inputs:
-        script: echo "$(Build.SourceVersionMessage)" > $(Build.Repository.LocalPath)\release.txt       
+        targetType: 'inline'
+        script: 'Write-Host $(Build.SourceVersionMessage)  > $(Build.Repository.LocalPath)\release.txt'   
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: release notes'
       inputs:
