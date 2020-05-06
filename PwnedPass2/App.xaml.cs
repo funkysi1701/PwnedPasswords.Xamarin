@@ -54,7 +54,7 @@ namespace PwnedPass2
                     //prepare to perform your data pull here as we have hit the 1 minute mark   
                     Task.Run(async () =>
                     {
-                        Cache.SaveData();
+                        await Cache.SaveData();
                     });
                     // Perform your long running operations here.
 
