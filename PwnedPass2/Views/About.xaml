@@ -71,6 +71,7 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+            <Button Text="Rate Pwned Pass" Command="{Binding RateCommand}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
   </ContentPage.Content>
 </ContentPage>
