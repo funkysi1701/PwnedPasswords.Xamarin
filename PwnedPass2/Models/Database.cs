@@ -49,6 +49,7 @@ namespace PwnedPass2.Models
             lock (Locker)
             {
                 return (from c in this.database.Table<HIBP>()
+                        orderby c.Id descending
                         select c).FirstOrDefault();
             }
         }
