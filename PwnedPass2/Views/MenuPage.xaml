@@ -7,6 +7,7 @@
              x:Class="PwnedPass2.Views.MenuPage"
              Title="Menu">
     <StackLayout VerticalOptions="FillAndExpand">
+        <Image Source="icon.png" BackgroundColor="Black"></Image>
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <d:ListView.ItemsSource>
@@ -19,7 +20,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="15" />
+                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="15" TextColor="Black" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
