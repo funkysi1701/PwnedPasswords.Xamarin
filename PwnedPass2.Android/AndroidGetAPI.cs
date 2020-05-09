@@ -40,7 +40,11 @@ namespace PwnedPass2.Droid
             try
             {
                 HttpResponseMessage response = this.GetAsyncAPI(url);
-                return await response.Content.ReadAsStringAsync();
+                if (response.Content == null)
+                {
+                    return string.Empty;
+                }
+                return await response.Content?.ReadAsStringAsync();
             }
             catch (Exception e)
             {

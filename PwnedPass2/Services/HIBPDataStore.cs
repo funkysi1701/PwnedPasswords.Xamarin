@@ -36,6 +36,26 @@ namespace PwnedPass2.Services
                 }
                 items = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
             }
+            else
+            {
+                var table = App.Database.GetAll();
+                var hibp = new List<HIBPModel>();
+                
+                foreach (var item in table)
+                {
+                    var temp = new HIBPModel
+                    {
+                        AddedDate = item.AddedDate,
+                        BreachDate = item.BreachDate,
+                        Name = item.Name,
+                        Description = item.Description,
+                        Title = item.Title,
+                        PwnCount = item.PwnCount
+                    };
+                    hibp.Add(temp);
+                }
+                items = hibp;
+            }
             items = OrderResults(items, orderby, orderdir);
             return await Task.FromResult(items);
         }
