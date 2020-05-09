@@ -15,33 +15,33 @@ namespace PwnedPass2.Models
         {
             this.database = DependencyService.Get<ISQLite>().GetConnection();
 
-            this.database.CreateTable<DataBreach>();
+            this.database.CreateTable<HIBPModel>();
             this.database.CreateTable<HIBP>();
             this.database.CreateTable<LastEmail>();
         }
 
-        public int SaveDataBreach(DataBreach databreach)
+        public int SaveDataBreach(HIBPModel hibpmodel)
         {
             lock (Locker)
             {
-                if (databreach.Id != 0)
+                if (hibpmodel.Id != 0)
                 {
-                    this.database.Delete(databreach);
-                    this.database.Insert(databreach);
-                    return databreach.Id;
+                    this.database.Delete(hibpmodel);
+                    this.database.Insert(hibpmodel);
+                    return hibpmodel.Id;
                 }
                 else
                 {
-                    this.database.Delete(databreach);
-                    return this.database.Insert(databreach);
+                    this.database.Delete(hibpmodel);
+                    return this.database.Insert(hibpmodel);
                 }
             }
         }
 
         public void EmptyDataBreach()
         {
-            this.database.DropTable<DataBreach>();
-            this.database.CreateTable<DataBreach>();
+            this.database.DropTable<HIBPModel>();
+            this.database.CreateTable<HIBPModel>();
         }
 
         public HIBP GetHIBP()
@@ -86,20 +86,20 @@ namespace PwnedPass2.Models
             }
         }
 
-        public IEnumerable<DataBreach> Get(int id)
+        public IEnumerable<HIBPModel> Get(int id)
         {
             lock (Locker)
             {
-                return (from c in this.database.Table<DataBreach>().Take(id)
+                return (from c in this.database.Table<HIBPModel>().Take(id)
                         select c).ToList();
             }
         }
 
-        public IEnumerable<DataBreach> GetAll()
+        public IEnumerable<HIBPModel> GetAll()
         {
             lock (Locker)
             {
-                return (from c in this.database.Table<DataBreach>()
+                return (from c in this.database.Table<HIBPModel>()
                         select c).ToList();
             }
         }

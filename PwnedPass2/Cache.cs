@@ -39,23 +39,7 @@ namespace PwnedPass2
                         var job = JsonConvert.DeserializeObject<HIBPResult>(result);
                         foreach (var item in job.HIBP)
                         {
-                            DataBreach db = new DataBreach
-                            {
-                                Title = item.Title.ToString(),
-                                Name = item.Name.ToString(),
-                                Domain = item.Domain.ToString(),
-                                PwnCount = item.PwnCount,
-                                BreachDate = item.BreachDate,
-                                AddedDate = item.AddedDate,
-                                ModifiedDate = item.ModifiedDate,
-                                IsVerified = item.IsVerified,
-                                IsSensitive = item.IsSensitive,
-                                IsRetired = item.IsRetired,
-                                IsSpamList = item.IsSpamList,
-                                IsFabricated = item.IsFabricated,
-                                Description = Regex.Replace(item.Description.ToString().Replace("&quot;", "'"), "<.*?>", string.Empty),
-                            };
-                            App.Database.SaveDataBreach(db);
+                            App.Database.SaveDataBreach(item);
                         }
                     }
                 }
@@ -77,7 +61,7 @@ namespace PwnedPass2
 
                 foreach (var item in job.HIBP)
                 {
-                    count += (long)item.PwnCount;
+                    count += item.PwnCount;
                 }
 
                 DependencyService.Get<ILog>().SendTracking("Get Number of Accounts");

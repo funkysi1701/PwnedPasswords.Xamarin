@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PwnedPass2.Services
@@ -78,8 +79,14 @@ namespace PwnedPass2.Services
         public async Task<Passwords> GetPasswordAsync(string hash)
         {
             string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
-            string count = this.GetCount(result, hash);
             var passwords = new Passwords();
+            if(string.IsNullOrEmpty(result))
+            {
+                passwords.Text = "No Connection, Please reconnect to the internet to check if this password has been pwned";
+                passwords.BgColor = Color.DarkOrange;
+                return await Task.FromResult(passwords);
+            }
+            string count = this.GetCount(result, hash);
             if (count == "0")
             {
                 passwords.Text = "This password has not been indexed by haveibeenpwned.com";
@@ -104,6 +111,22 @@ namespace PwnedPass2.Services
                     item.Description = Regex.Replace(item.Description.ToString().Replace("&quot;", "'"), "<.*?>", string.Empty);
                 }
                 emails = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
+            }
+            else
+            {
+                var error = new HIBPModel
+                {
+                    Title = "No Connection",
+                    Description = "Please reconnect to the internet to check if this email has been pwned",
+                    PwnCount = 0,
+                    AddedDate = DateTime.UtcNow
+                };
+
+                var emailsmodel = new List<HIBPModel>
+                {
+                    error
+                };
+                emails = emailsmodel;
             }
             emails = OrderResults(emails, orderby, orderdir);
             return await Task.FromResult(emails);

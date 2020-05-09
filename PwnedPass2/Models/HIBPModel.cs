@@ -1,10 +1,14 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 
 namespace PwnedPass2.Models
 {
     public class HIBPModel
     {
+        [PrimaryKey]
+        [AutoIncrement]
+        public int Id { get; set; }
         public string Title { get; set; }
 
         public string Name { get; set; }
@@ -20,8 +24,6 @@ namespace PwnedPass2.Models
         public int PwnCount { get; set; }
 
         public string Description { get; set; }
-
-        public IList<string> DataClasses { get; set; }
 
         public bool IsVerified { get; set; }
 

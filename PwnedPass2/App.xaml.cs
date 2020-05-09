@@ -1,5 +1,6 @@
 ﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPass2.Services;
@@ -39,7 +40,7 @@ namespace PwnedPass2
 
         protected override void OnStart()
         {
-            AppCenter.Start("uwp=f497a9fd-3c8b-4072-87ea-2b6e8d057a52;" + "android=29b4ff89-6554-4d25-bb78-93cd14a3b280;", typeof(Analytics));
+            AppCenter.Start("uwp=f497a9fd-3c8b-4072-87ea-2b6e8d057a52;" + "android=29b4ff89-6554-4d25-bb78-93cd14a3b280;", typeof(Analytics), typeof(Crashes));
             if (!stopWatch.IsRunning)
             {
                 stopWatch.Start();
