@@ -16,7 +16,7 @@ namespace PwnedPass2
         public static IAPI GetAPI { get; private set; }
         public static IHash GetHash { get; private set; }
         private static Database database;
-        private static Stopwatch stopWatch = new Stopwatch();
+        private static readonly Stopwatch stopWatch = new Stopwatch();
         private const int defaultTimespan = 5;
 
         public App()

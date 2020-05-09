@@ -82,6 +82,11 @@ namespace PwnedPass2
 
                 DependencyService.Get<ILog>().SendTracking("Get Number of Accounts");
             }
+            else
+            {
+                var table = App.Database.GetHIBP();
+                count = table.TotalAccounts;
+            }
 
             return count;
         }
@@ -100,6 +105,11 @@ namespace PwnedPass2
                 }
 
                 DependencyService.Get<ILog>().SendTracking("Get Number of Breaches");
+            }
+            else
+            {
+                var table = App.Database.GetHIBP();
+                count = table.TotalBreaches;
             }
 
             return count;
