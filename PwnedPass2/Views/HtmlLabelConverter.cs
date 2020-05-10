@@ -1,8 +1,6 @@
-﻿using SQLitePCL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -16,10 +14,52 @@ namespace PwnedPass2.Views
         {
             var formatted = new FormattedString();
 
-            foreach (var item in ProcessString((string)value))
-                formatted.Spans.Add(CreateSpan(item));
+            foreach (var item in ProcessStringForEm(ProcessString((string)value)))
+            {
+                if (item.Italic)
+                {
+                    formatted.Spans.Add(CreateSpanItalic(item));
+                }
+                else formatted.Spans.Add(CreateSpan(item));
+            }
 
             return formatted;
+        }
+
+        private IList<StringSection> ProcessStringForEm(IList<StringSection> processedString)
+        {
+            const string spanPattern = @"(<em.*?>.*?</em>)";
+
+            var sections = new List<StringSection>();
+            foreach (var item2 in processedString)
+            {
+                if (item2.Link != null)
+                {
+                    sections.Add(item2);
+                }
+                MatchCollection collection = Regex.Matches(item2.Text, spanPattern, RegexOptions.Singleline);
+
+                var lastIndex = 0;
+                foreach (Match item in collection)
+                {
+                    var foundText = item.Value;
+                    sections.Add(new StringSection() { Text = item2.Text.Substring(lastIndex, item.Index - lastIndex) });
+                    lastIndex += item.Index - lastIndex + item.Length;
+
+                    // Get italic
+                    var html = new StringSection()
+                    {
+                        Link = null,
+                        Text = Regex.Replace(item.Value, "<.*?>", string.Empty),
+                        Italic = true
+                    };
+
+                    sections.Add(html);
+                }
+                sections.Add(new StringSection() { Text = item2.Text.Substring(lastIndex) });
+            }
+
+            return sections;
         }
 
         private Span CreateSpan(StringSection section)
@@ -37,16 +77,25 @@ namespace PwnedPass2.Views
                     CommandParameter = section.Link
                 });
                 span.TextColor = Color.Blue;
-                // Underline coming soon from https://github.com/xamarin/Xamarin.Forms/pull/2221
-                // Currently available in Nightly builds if you wanted to try, it does work :)
-                // As of 2018-07-22. But not avail in 3.2.0-pre1.
-                // span.TextDecorations = TextDecorations.Underline;
+                span.TextDecorations = TextDecorations.Underline;
             }
 
             return span;
         }
 
-        protected IList<StringSection> ProcessString(string rawText)
+        private Span CreateSpanItalic(StringSection section)
+        {
+            var span = new Span()
+            {
+                Text = section.Text
+            };
+
+            span.FontAttributes = FontAttributes.Italic;
+
+            return span;
+        }
+
+        protected static IList<StringSection> ProcessString(string rawText)
         {
             const string spanPattern = @"(<a.*?>.*?</a>)";
 
@@ -62,11 +111,12 @@ namespace PwnedPass2.Views
                 sections.Add(new StringSection() { Text = rawText.Substring(lastIndex, item.Index - lastIndex) });
                 lastIndex += item.Index - lastIndex + item.Length;
 
-                // Get HTML href 
+                // Get HTML href
                 var html = new StringSection()
                 {
                     Link = Regex.Match(item.Value, "(?<=href=\\\")[\\S]+(?=\\\")").Value,
-                    Text = Regex.Replace(item.Value, "<.*?>", string.Empty)
+                    Text = Regex.Replace(item.Value, "<.*?>", string.Empty),
+                    Italic = false
                 };
 
                 sections.Add(html);
@@ -84,9 +134,10 @@ namespace PwnedPass2.Views
         {
             public string Text { get; set; }
             public string Link { get; set; }
+            public bool Italic { get; set; }
         }
 
-        private ICommand _navigationCommand = new Command<string>((url) =>
+        private readonly ICommand _navigationCommand = new Command<string>((url) =>
         {
             Launcher.OpenAsync(new Uri(url));
         });

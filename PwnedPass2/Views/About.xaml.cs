@@ -8,7 +8,7 @@ namespace PwnedPass2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class About : ContentPage
     {
-        private AboutViewModel viewModel;
+        private readonly AboutViewModel viewModel;
         public About()
         {
             InitializeComponent();
