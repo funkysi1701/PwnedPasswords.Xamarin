@@ -17,8 +17,8 @@ namespace PwnedPass2.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.EmailSearch, Title="Search by Email" },
-                new HomeMenuItem {Id = MenuItemType.PasswordSearch, Title="Search by Password" },
+                new HomeMenuItem {Id = MenuItemType.EmailSearch, Title="Search for Email" },
+                new HomeMenuItem {Id = MenuItemType.PasswordSearch, Title="Search for Password" },
                 new HomeMenuItem {Id = MenuItemType.List, Title="List of Data Breaches" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" },
                 new HomeMenuItem {Id = MenuItemType.Rate, Title="Rate Pwned Pass" }

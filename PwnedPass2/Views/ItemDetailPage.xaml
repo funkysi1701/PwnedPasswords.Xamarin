@@ -7,11 +7,19 @@
              x:Class="PwnedPass2.Views.ItemDetailPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="{Binding Item.Domain}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
-        <Label Text="{Binding Path=Item.PwnCount, StringFormat='{0:n0} pwned accounts'}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
-        <Label Text="{Binding Path=Item.BreachDate, StringFormat='Breach Date {0:dd/MM/yy}'}" d:Text="Item name" FontSize="Medium" />
-        <Label Text="{Binding Path=Item.AddedDate, StringFormat='Added Date {0:dd/MM/yy}'}" d:Text="Item name" FontSize="Medium" />
+    <StackLayout Spacing="20" Padding="15" >
+        <StackLayout Padding="10" Margin="5" Orientation="Horizontal">
+            <StackLayout BackgroundColor="LightBlue" Padding="10">
+            <Image Source="{Binding Item.LogoPath}" WidthRequest="150"  />
+            </StackLayout>
+            <StackLayout Padding="10">
+            <Label Text="{Binding Item.Domain}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="{Binding Path=Item.PwnCount, StringFormat='{0:n0} pwned accounts'}" d:Text="Item name" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="{Binding Path=Item.BreachDate, StringFormat='Breach Date {0:dd/MM/yy}'}" d:Text="Item name" FontSize="Medium" />
+            <Label Text="{Binding Path=Item.AddedDate, StringFormat='Added Date {0:dd/MM/yy}'}" d:Text="Item name" FontSize="Medium" />
+        </StackLayout>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
         <Label>
             <Label.Triggers>
                 <DataTrigger TargetType="Label" Binding="{Binding Item.IsVerified}" Value="false">
@@ -82,6 +90,7 @@
                 </DataTrigger>
             </Label.Triggers>
         </Label>
+        </StackLayout>
         <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Medium" />
     </StackLayout>
 </ContentPage>

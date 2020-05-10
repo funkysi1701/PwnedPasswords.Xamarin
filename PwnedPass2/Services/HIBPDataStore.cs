@@ -33,7 +33,7 @@ namespace PwnedPass2.Services
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);
                 foreach (var item in job.HIBP)
                 {
-                    item.Description = Regex.Replace(item.Description.ToString().Replace("&quot;", "'"), "<.*?>", string.Empty);
+                    item.Description = item.Description.ToString().Replace("&quot;", "'"); //Regex.Replace(, "<.*?>", string.Empty);
                 }
                 items = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
             }

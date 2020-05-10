@@ -26,8 +26,8 @@
                 </StackLayout.Padding>
             <Label>
                 <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Pwned Pass allows you to search the database of " FontSize="Large"/>
+                        <FormattedString>
+                            <Span Text="Pwned Pass allows you to search the database of " FontSize="Large"/>
                         <Span Text="haveibeenpwned.com"
                               FontSize="Large"
                               TextColor="Blue"

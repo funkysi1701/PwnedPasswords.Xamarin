@@ -60,12 +60,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10">
+                        <StackLayout Padding="10" Margin="5" Orientation="Horizontal" BackgroundColor="LightBlue">
+                            <Image Source="{Binding LogoPath}" HeightRequest="20" WidthRequest="50" />
                             <Label Text="{Binding Title}"
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemTextStyle}"
-                                FontSize="16" />
+                                    d:Text="{Binding .}"                                   
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="16" 
+                                    TextColor="Black"/>
+
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

@@ -36,5 +36,7 @@ namespace PwnedPass2.Models
         public bool IsSpamList { get; set; }
 
         public string LogoType { get; set; }
+
+        public string LogoPath { get; set; }
     }
 }
