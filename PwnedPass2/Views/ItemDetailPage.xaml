@@ -29,11 +29,6 @@
         <StackLayout Orientation="Horizontal">
             <Label>
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Item.IsVerified}" Value="false">
-                        <Setter Property="Text" Value="Verified: N" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="TextColor" Value="Red" />
-                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Item.IsVerified}" Value="true">
                         <Setter Property="Text" Value="Verified: Y" />
                         <Setter Property="FontSize" Value="Small" />
@@ -43,11 +38,6 @@
             </Label>
             <Label>
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Item.IsSensitive}" Value="false">
-                        <Setter Property="Text" Value="Sensitive: N" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="TextColor" Value="Red" />
-                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Item.IsSensitive}" Value="true">
                         <Setter Property="Text" Value="Sensitive: Y" />
                         <Setter Property="FontSize" Value="Small" />
@@ -57,11 +47,6 @@
             </Label>
             <Label>
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Item.IsRetired}" Value="false">
-                        <Setter Property="Text" Value="Retired: N" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="TextColor" Value="Red" />
-                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Item.IsRetired}" Value="true">
                         <Setter Property="Text" Value="Retired: Y" />
                         <Setter Property="FontSize" Value="Small" />
@@ -71,11 +56,6 @@
             </Label>
             <Label>
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Item.IsSpamList}" Value="false">
-                        <Setter Property="Text" Value="Spam: N" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="TextColor" Value="Red" />
-                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Item.IsSpamList}" Value="true">
                         <Setter Property="Text" Value="Spam: Y" />
                         <Setter Property="FontSize" Value="Small" />
@@ -85,11 +65,6 @@
             </Label>
             <Label>
                 <Label.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Item.IsFabricated}" Value="false">
-                        <Setter Property="Text" Value="Fabricated: N" />
-                        <Setter Property="FontSize" Value="Small" />
-                        <Setter Property="TextColor" Value="Red" />
-                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Item.IsFabricated}" Value="true">
                         <Setter Property="Text" Value="Fabricated: Y" />
                         <Setter Property="FontSize" Value="Small" />

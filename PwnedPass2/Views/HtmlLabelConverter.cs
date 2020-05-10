@@ -22,7 +22,7 @@ namespace PwnedPass2.Views
                 }
                 else formatted.Spans.Add(CreateSpan(item));
             }
-
+            formatted.Spans[0].Text = formatted.Spans[0].Text.Substring(1);
             return formatted;
         }
 
@@ -43,7 +43,7 @@ namespace PwnedPass2.Views
                 foreach (Match item in collection)
                 {
                     var foundText = item.Value;
-                    sections.Add(new StringSection() { Text = item2.Text.Substring(lastIndex, item.Index - lastIndex) });
+                    sections.Add(new StringSection() { Text = (item2.Text.Substring(lastIndex, item.Index - lastIndex).Replace("&amp;", "&")).Replace("&mdash;", "-") });
                     lastIndex += item.Index - lastIndex + item.Length;
 
                     // Get italic
@@ -56,7 +56,7 @@ namespace PwnedPass2.Views
 
                     sections.Add(html);
                 }
-                sections.Add(new StringSection() { Text = item2.Text.Substring(lastIndex) });
+                sections.Add(new StringSection() { Text = (item2.Text.Substring(lastIndex).Replace("&amp;", "&")).Replace("&mdash;","-") });
             }
 
             return sections;
@@ -78,6 +78,10 @@ namespace PwnedPass2.Views
                 });
                 span.TextColor = Color.Blue;
                 span.TextDecorations = TextDecorations.Underline;
+            }
+            else
+            {
+                span.Text = " " + span.Text;
             }
 
             return span;
