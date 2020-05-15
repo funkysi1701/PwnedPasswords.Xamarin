@@ -1,4 +1,5 @@
 ﻿using PwnedPass2.Interfaces;
+using PwnedPasswords.Core;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace PwnedPass2.Models
         {
             this.database = DependencyService.Get<ISQLite>().GetConnection();
 
-            this.database.CreateTable<HIBPModel>();
             this.database.CreateTable<HIBP>();
+            this.database.CreateTable<HIBPTotals>();
             this.database.CreateTable<LastEmail>();
         }
 
-        public int SaveDataBreach(HIBPModel hibpmodel)
+        public int SaveDataBreach(HIBP hibpmodel)
         {
             lock (Locker)
             {
@@ -40,21 +41,21 @@ namespace PwnedPass2.Models
 
         public void EmptyDataBreach()
         {
-            this.database.DropTable<HIBPModel>();
-            this.database.CreateTable<HIBPModel>();
+            this.database.DropTable<HIBP>();
+            this.database.CreateTable<HIBP>();
         }
 
-        public HIBP GetHIBP()
+        public HIBPTotals GetHIBP()
         {
             lock (Locker)
             {
-                return (from c in this.database.Table<HIBP>()
+                return (from c in this.database.Table<HIBPTotals>()
                         orderby c.Id descending
                         select c).FirstOrDefault();
             }
         }
 
-        public int SaveHIBP(HIBP hibp)
+        public int SaveHIBP(HIBPTotals hibp)
         {
             lock (Locker)
             {
@@ -86,20 +87,20 @@ namespace PwnedPass2.Models
             }
         }
 
-        public IEnumerable<HIBPModel> Get(int id)
+        public IEnumerable<HIBP> Get(int id)
         {
             lock (Locker)
             {
-                return (from c in this.database.Table<HIBPModel>().Take(id)
+                return (from c in this.database.Table<HIBP>().Take(id)
                         select c).ToList();
             }
         }
 
-        public IEnumerable<HIBPModel> GetAll()
+        public IEnumerable<HIBP> GetAll()
         {
             lock (Locker)
             {
-                return (from c in this.database.Table<HIBPModel>()
+                return (from c in this.database.Table<HIBP>()
                         select c).ToList();
             }
         }

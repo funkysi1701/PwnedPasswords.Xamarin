@@ -1,5 +1,6 @@
 ﻿using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
+using PwnedPasswords.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace PwnedPass2.ViewModels
 {
     public class EmailViewModel : BaseViewModel
     {
-        public ObservableCollection<HIBPModel> Emails { get; set; }
+        public ObservableCollection<HIBP> Emails { get; set; }
         public Command LoadEmailsCommand { get; set; }
 
         public string EmailInput { get; set; }
@@ -24,7 +25,7 @@ namespace PwnedPass2.ViewModels
         {
             Title = "';** pwned pass";
             EmailInput = EmailInp;
-            Emails = new ObservableCollection<HIBPModel>();
+            Emails = new ObservableCollection<HIBP>();
             LoadEmailsCommand = new Command(async () => await ExecuteLoadItemsCommand(EmailInput, order, orderby));
             SetSort(order, orderby);
             SetSort(order, orderby);

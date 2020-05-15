@@ -2,7 +2,7 @@
 
 namespace PwnedPass2.Models
 {
-    public class HIBP
+    public class HIBPTotals
     {
         [PrimaryKey]
         [AutoIncrement]

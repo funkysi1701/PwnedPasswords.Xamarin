@@ -1,4 +1,5 @@
 ﻿using PwnedPass2.Models;
+using PwnedPasswords.Core;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace PwnedPass2.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<HIBPModel> Items { get; set; }
+        public ObservableCollection<HIBP> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public string DateSort { get; set; }
         public string NameSort { get; set; }
@@ -19,7 +20,7 @@ namespace PwnedPass2.ViewModels
         public ItemsViewModel(string filter, bool order, string orderby)
         {
             Title = "';** pwned pass";
-            Items = new ObservableCollection<HIBPModel>();
+            Items = new ObservableCollection<HIBP>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby, filter));
             SetSort(order, orderby);
             SetSort(order, orderby);

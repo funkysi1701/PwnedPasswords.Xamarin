@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PwnedPass2.Models;
+using PwnedPasswords.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,22 @@ using Xamarin.Forms;
 
 namespace PwnedPass2.Services
 {
-    public class HIBPDataStore : IDataStore<HIBPModel>
+    public class HIBPDataStore : IDataStore<HIBP>
     {
-        public IEnumerable<HIBPModel> items;
-        public IEnumerable<HIBPModel> emails;
+        public IEnumerable<HIBP> items;
+        public IEnumerable<HIBP> emails;
         public string passwords;
 
         public HIBPDataStore()
         {
         }
 
-        public async Task<HIBPModel> GetItemAsync(string id)
+        public async Task<HIBP> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Name == id));
         }
 
-        public async Task<IEnumerable<HIBPModel>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
+        public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
             string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
             if (result != null && result.Length > 0)
@@ -40,11 +41,11 @@ namespace PwnedPass2.Services
             else
             {
                 var table = App.Database.GetAll();
-                var hibp = new List<HIBPModel>();
+                var hibp = new List<HIBP>();
                 
                 foreach (var item in table)
                 {
-                    var temp = new HIBPModel
+                    var temp = new HIBP
                     {
                         AddedDate = item.AddedDate,
                         BreachDate = item.BreachDate,
@@ -100,7 +101,7 @@ namespace PwnedPass2.Services
             return await Task.FromResult(passwords);
         }
 
-        public async Task<IEnumerable<HIBPModel>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
+        public async Task<IEnumerable<HIBP>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
         {
             string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckEmail?email=" + emailsInp);
             if (result != null && result.Length > 0)
@@ -114,7 +115,7 @@ namespace PwnedPass2.Services
             }
             else
             {
-                var error = new HIBPModel
+                var error = new HIBP
                 {
                     Title = "No Connection",
                     Description = "Please reconnect to the internet to check if this email has been pwned",
@@ -122,7 +123,7 @@ namespace PwnedPass2.Services
                     AddedDate = DateTime.UtcNow
                 };
 
-                var emailsmodel = new List<HIBPModel>
+                var emailsmodel = new List<HIBP>
                 {
                     error
                 };
@@ -132,9 +133,9 @@ namespace PwnedPass2.Services
             return await Task.FromResult(emails);
         }
 
-        public static IEnumerable<HIBPModel> OrderResults(IEnumerable<HIBPModel> items, string orderby, bool orderdir)
+        public static IEnumerable<HIBP> OrderResults(IEnumerable<HIBP> items, string orderby, bool orderdir)
         {
-            GenericSort<HIBPModel> gs = new GenericSort<HIBPModel>();
+            GenericSort<HIBP> gs = new GenericSort<HIBP>();
             items = gs.Sort(items, orderby, orderdir).ToList();
 
             return items;

@@ -14,7 +14,7 @@ namespace PwnedPass2
         {
             try
             {
-                HIBP data = new HIBP();
+                HIBPTotals data = new HIBPTotals();
                 long acc = await GetAccounts();
                 int bre = await GetBreach();
                 if (acc > 1)

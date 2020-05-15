@@ -1,5 +1,6 @@
 ﻿using PwnedPass2.Models;
 using PwnedPass2.Services;
+using PwnedPasswords.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ namespace PwnedPass2.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<HIBPModel> DataStore => DependencyService.Get<IDataStore<HIBPModel>>();
+        public IDataStore<HIBP> DataStore => DependencyService.Get<IDataStore<HIBP>>();
 
         private bool isBusy = false;
 

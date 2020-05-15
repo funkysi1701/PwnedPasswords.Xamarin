@@ -1,5 +1,6 @@
 ﻿using PwnedPass2.Models;
 using PwnedPass2.ViewModels;
+using PwnedPasswords.Core;
 using System.ComponentModel;
 using Xamarin.Forms;
 
@@ -23,7 +24,7 @@ namespace PwnedPass2.Views
         {
             InitializeComponent();
 
-            var item = new HIBPModel
+            var item = new HIBP
             {
                 Name = "Item 1",
                 Description = "This is an item description."

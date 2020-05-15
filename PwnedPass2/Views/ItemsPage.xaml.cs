@@ -1,6 +1,7 @@
 ﻿using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPass2.ViewModels;
+using PwnedPasswords.Core;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -27,7 +28,7 @@ namespace PwnedPass2.Views
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (!(args.SelectedItem is HIBPModel item))
+            if (!(args.SelectedItem is HIBP item))
                 return;
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
