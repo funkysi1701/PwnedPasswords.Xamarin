@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Autofac;
+using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using System;
@@ -14,6 +15,7 @@ namespace PwnedPass2
         {
             try
             {
+                var config = AppContainer.Container.Resolve<IConfiguration>();
                 HIBPTotals data = new HIBPTotals();
                 long acc = await GetAccounts();
                 int bre = await GetBreach();
@@ -33,7 +35,7 @@ namespace PwnedPass2
                     data.Id = 1;
                     App.Database.SaveHIBP(data);
                     App.Database.EmptyDataBreach();
-                    string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
+                    string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
                     if (result != null && result.Length > 0)
                     {
                         var job = JsonConvert.DeserializeObject<HIBPResult>(result);
@@ -53,7 +55,8 @@ namespace PwnedPass2
 
         public static async Task<long> GetAccounts()
         {
-            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
+            var config = AppContainer.Container.Resolve<IConfiguration>();
+            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
             long count = 0;
             if (result != null && result.Length > 0)
             {
@@ -77,7 +80,8 @@ namespace PwnedPass2
 
         public static async Task<int> GetBreach()
         {
-            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
+            var config = AppContainer.Container.Resolve<IConfiguration>();
+            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
             int count = 0;
             if (result != null && result.Length > 0)
             {

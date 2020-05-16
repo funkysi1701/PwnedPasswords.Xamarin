@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Autofac;
+using Newtonsoft.Json;
+using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPasswords.Core;
 using System;
@@ -6,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PwnedPass2.Services
@@ -16,9 +17,10 @@ namespace PwnedPass2.Services
         public IEnumerable<HIBP> items;
         public IEnumerable<HIBP> emails;
         public string passwords;
-
+        private IConfiguration config;
         public HIBPDataStore()
         {
+            config = AppContainer.Container.Resolve<IConfiguration>();
         }
 
         public async Task<HIBP> GetItemAsync(string id)
@@ -28,7 +30,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/GetBreaches");
+            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);
@@ -79,7 +81,7 @@ namespace PwnedPass2.Services
 
         public async Task<Passwords> GetPasswordAsync(string hash)
         {
-            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
+            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/CheckPasswords?hash=" + hash.Substring(0, 5));
             var passwords = new Passwords();
             if(string.IsNullOrEmpty(result))
             {
@@ -103,7 +105,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBP>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetAPI.GetHIBP("https://pwnedpassapifsi.azurewebsites.net/api/v2/HIBP/CheckEmail?email=" + emailsInp);
+            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/CheckEmail?email=" + emailsInp);
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);

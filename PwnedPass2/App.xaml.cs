@@ -1,12 +1,15 @@
 ﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPass2.Services;
 using PwnedPass2.Views;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -20,8 +23,9 @@ namespace PwnedPass2
         private static readonly Stopwatch stopWatch = new Stopwatch();
         private const int defaultTimespan = 5;
 
-        public App()
+        public App(AppSetup setup)
         {
+            AppContainer.Container = setup.CreateContainer();
             InitializeComponent();
 
             DependencyService.Register<HIBPDataStore>();

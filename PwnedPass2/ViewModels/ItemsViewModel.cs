@@ -1,5 +1,4 @@
-﻿using PwnedPass2.Models;
-using PwnedPasswords.Core;
+﻿using PwnedPasswords.Core;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;

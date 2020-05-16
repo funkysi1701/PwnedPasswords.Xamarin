@@ -20,7 +20,7 @@ namespace PwnedPass2.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             App.InitHash(new AndroidGetHash());
             App.InitAPI(new AndroidGetAPI());
-            LoadApplication(new App());
+            LoadApplication(new App(new AppSetup()));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

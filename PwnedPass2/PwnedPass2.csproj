@@ -1,11 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Target Name="CopyConfigFiles" AfterTargets="CoreCompile">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)/Configuration-Source/$(Configuration)/config.json" DestinationFolder="$(MSBuildProjectDirectory)/Configuration/" />
+  </Target>
+  
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="Microsoft.AppCenter" Version="3.2.1" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.1" />
