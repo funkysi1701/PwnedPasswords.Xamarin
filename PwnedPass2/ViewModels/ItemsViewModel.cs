@@ -1,4 +1,8 @@
-﻿using PwnedPasswords.Core;
+﻿using Autofac;
+using PwnedPass2.Interfaces;
+using PwnedPass2.Models;
+using PwnedPasswords.Core;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,6 +30,26 @@ namespace PwnedPass2.ViewModels
             SetSort(order, orderby);
             Breach = SetBreach().Result;
             Account = SetAccount().Result;
+            TweakIfBeta();
+        }
+
+        private void TweakIfBeta()
+        {
+            var config = AppContainer.Container.Resolve<IConfiguration>();
+            if (config.Beta)
+            {
+                var table = App.Database.GetHIBP();
+                var acc = table.TotalAccounts;
+                var breach = table.TotalBreaches;
+                acc += 1;
+                breach += 1;
+                var data = new HIBPTotals
+                {
+                    TotalBreaches = breach,
+                    TotalAccounts = acc
+                };
+                App.Database.SaveHIBP(data);
+            }
         }
 
         private async Task<string> SetAccount()

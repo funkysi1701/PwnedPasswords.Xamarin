@@ -1,4 +1,7 @@
-﻿using PwnedPass2.Interfaces;
+﻿using Autofac;
+using PwnedPass2.Interfaces;
+using PwnedPass2.Models;
+using PwnedPasswords.Core;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -25,6 +28,7 @@ namespace PwnedPass2
             {
                 DependencyService.Get<ILog>().SendTracking("Error");
                 DependencyService.Get<ILog>().SendTracking(e.Message, e);
+                await Cache.SaveData();
             }
             if (count == 0)
             {
