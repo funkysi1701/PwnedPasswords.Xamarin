@@ -25,7 +25,7 @@ stages:
         secureFile: simon2.keystore
     - task: DownloadSecureFile@1
       inputs:
-        secureFile: zipalign2.bat
+        secureFile: zipalign3.bat
     - script: '(echo $(Build.BuildNumber) && echo $(Build.BuildId)) > .buildinfo.json'
       displayName: 'Emit build number'
       workingDirectory: '$(Build.SourcesDirectory)/PwnedPass2'
@@ -85,13 +85,13 @@ stages:
         Write-Output ("##vso[task.setvariable variable=AndroidVer;]$temp")
         Write-host $AndroidVer
       displayName: 'Set Android Version'
-    - script: '$(Agent.TempDirectory)\zipalign2.bat'
+    - script: '$(Agent.TempDirectory)\zipalign3.bat'
       displayName: 'zipalign Script'
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: apk'
+      displayName: 'Publish Artifact: aab'
       inputs:
-        PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.apk'
-        ArtifactName: APK
+        PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.aab'
+        ArtifactName: AAB
     - task: PowerShell@2
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
       inputs:
