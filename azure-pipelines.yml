@@ -97,7 +97,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: '
-        Add-Content -Path $(Build.Repository.LocalPath)\release.txt -Value "Beta\n$(Build.SourceVersionMessage)\nBeta" -Encoding "utf8"'
+        Add-Content -Path $(Build.Repository.LocalPath)\release.txt -Value "$(Build.SourceVersionMessage)" -Encoding "utf8"'
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: release notes'
       inputs:
