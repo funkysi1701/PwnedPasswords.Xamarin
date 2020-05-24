@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,10 +11,10 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-        <StackLayout>
-            <Image Source="icon.png" BackgroundColor="Black" HorizontalOptions="FillAndExpand"></Image>
-        </StackLayout>
-        <StackLayout>
+            <StackLayout>
+                <Image Source="icon.png" BackgroundColor="Black" HorizontalOptions="FillAndExpand"></Image>
+            </StackLayout>
+            <StackLayout>
                 <StackLayout.Padding>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="iOS, Android, UWP">
@@ -24,60 +24,61 @@
                         </On>
                     </OnPlatform>
                 </StackLayout.Padding>
-            <Label>
-                <Label.FormattedText>
+                <Label>
+                    <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Pwned Pass allows you to search the database of " FontSize="Large"/>
-                        <Span Text="haveibeenpwned.com"
+                            <Span Text="Pwned Pass allows you to search the database of " FontSize="Large" />
+                            <Span Text="haveibeenpwned.com"
                               FontSize="Large"
                               TextColor="Blue"
                               TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ClickCommand}"
                                           CommandParameter="https://haveibeenpwned.com/" />
-                            </Span.GestureRecognizers>
-                        </Span>
-                        <Span Text=" for a list of accounts (or email addresses) that have been leaked in a data breach that was exposed to the internet. " FontSize="Large" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Have I Been Pwned was created by " FontSize="Large" />
-                        <Span Text="Troy Hunt"
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=" for a list of accounts (or email addresses) that have been leaked in a data breach that was exposed to the internet. " FontSize="Large" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Have I Been Pwned was created by " FontSize="Large" />
+                            <Span Text="Troy Hunt"
                               FontSize="Large"
                               TextColor="Blue"
                               TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ClickCommand}"
                                           CommandParameter="https://www.troyhunt.com/" />
-                            </Span.GestureRecognizers>
-                        </Span>
-                        <Span Text=". " FontSize="Large"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Pwned Pass was created by " FontSize="Large" />
-                        <Span Text="Simon Foster"
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=". " FontSize="Large" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Pwned Pass was created by " FontSize="Large" />
+                            <Span Text="Simon Foster"
                               FontSize="Large"
                               TextColor="Blue"
                               TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClickCommand}"
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ClickCommand}"
                                           CommandParameter="https://dev.funkysi1701.com/" />
-                            </Span.GestureRecognizers>
-                        </Span>
-                        <Span Text=", who is a Developer working in the North of England. He has been working in IT departments for over 13 years and has a wide range of experience. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Large" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label/>
-            <Button Text="Rate Pwned Pass" Command="{Binding RateCommand}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text=", who is a Developer working in the North of England. He has been working in IT departments for over 13 years and has a wide range of experience. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Large" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label />
+                <Button Text="Rate Pwned Pass" Command="{Binding RateCommand}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" />
+                <Button Text="Increase Count" Command="{Binding IncreaseCounts}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" IsVisible="{Binding Beta}" Opacity="{Binding BetaInt}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

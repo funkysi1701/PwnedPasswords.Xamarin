@@ -1,5 +1,4 @@
-﻿
-using PwnedPass2.ViewModels;
+﻿using PwnedPass2.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +8,7 @@ namespace PwnedPass2.Views
     public partial class About : ContentPage
     {
         private readonly AboutViewModel viewModel;
+
         public About()
         {
             InitializeComponent();

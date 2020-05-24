@@ -30,26 +30,6 @@ namespace PwnedPass2.ViewModels
             SetSort(order, orderby);
             Breach = SetBreach().Result;
             Account = SetAccount().Result;
-            TweakIfBeta();
-        }
-
-        private void TweakIfBeta()
-        {
-            var config = AppContainer.Container.Resolve<IConfiguration>();
-            if (config.Beta)
-            {
-                var table = App.Database.GetHIBP();
-                var acc = table.TotalAccounts;
-                var breach = table.TotalBreaches;
-                acc += 1;
-                breach += 1;
-                var data = new HIBPTotals
-                {
-                    TotalBreaches = breach,
-                    TotalAccounts = acc
-                };
-                App.Database.SaveHIBP(data);
-            }
         }
 
         private async Task<string> SetAccount()
