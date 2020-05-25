@@ -1,4 +1,5 @@
 ﻿using Microsoft.AppCenter.Crashes;
+using Plugin.CurrentActivity;
 using PwnedPass2.Interfaces;
 using System;
 using System.Net.Http;
@@ -14,12 +15,13 @@ namespace PwnedPass2.Droid
         /// </summary>
         /// <param name="url">url goes here.</param>
         /// <returns>HttpResponseMessage.</returns>
-        public HttpResponseMessage GetAsyncAPI(string url)
+        public HttpResponseMessage GetAsyncAPI(string url,string version)
         {
             HttpClient client = new HttpClient();
             DependencyService.Get<ILog>().SendTracking("GetAsyncAPI " + url);
             try
             {
+                client.DefaultRequestHeaders.Add("Version", version);
                 return client.GetAsync(url).Result;
             }
             catch (Exception e)
@@ -39,7 +41,9 @@ namespace PwnedPass2.Droid
         {
             try
             {
-                HttpResponseMessage response = this.GetAsyncAPI(url);
+                var crosscontext = CrossCurrentActivity.Current.Activity;
+                var version = crosscontext.PackageManager.GetPackageInfo(crosscontext.PackageName, 0).VersionName;
+                HttpResponseMessage response = GetAsyncAPI(url, version);
                 if (response.Content == null)
                 {
                     return string.Empty;

@@ -77,7 +77,6 @@
                 </Label>
                 <Label />
                 <Button Text="Rate Pwned Pass" Command="{Binding RateCommand}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" />
-                <Button Text="Increase Count" Command="{Binding IncreaseCounts}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" IsVisible="{Binding Beta}" Opacity="{Binding BetaInt}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

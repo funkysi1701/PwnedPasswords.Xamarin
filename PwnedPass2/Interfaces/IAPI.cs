@@ -17,6 +17,6 @@ namespace PwnedPass2.Interfaces
         /// </summary>
         /// <param name="url">url.</param>
         /// <returns>Task HttpResponseMessage.</returns>
-        HttpResponseMessage GetAsyncAPI(string url);
+        HttpResponseMessage GetAsyncAPI(string url, string version);
     }
 }
