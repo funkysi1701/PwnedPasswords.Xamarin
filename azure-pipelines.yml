@@ -20,6 +20,11 @@ stages:
       inputs: 
        targetType: 'inline'
        script: 'Copy $(Build.SourcesDirectory)\PwnedPass2\Configuration-Source\Debug\config.json $(Build.SourcesDirectory)\PwnedPass2\Configuration\config.json'
+    - task: PowerShell@2
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      inputs: 
+       targetType: 'inline'
+       script: 'Copy $(Build.SourcesDirectory)\PwnedPass2\Configuration-Source\Release\config.json $(Build.SourcesDirectory)\PwnedPass2\Configuration\config.json'       
     - task: DownloadSecureFile@1
       inputs:
         secureFile: simon2.keystore
@@ -88,15 +93,8 @@ stages:
         Write-Output ("##vso[task.setvariable variable=AndroidVer;]$temp")
         Write-host $AndroidVer
       displayName: 'Set Android Version'
-    # - script: '$(Agent.TempDirectory)\zipalign2.bat'
-    #   displayName: 'zipalign Script'
     - script: '$(Agent.TempDirectory)\zipalign3.bat'
       displayName: 'zipalign Script'
-    # - task: PublishBuildArtifacts@1
-    #   displayName: 'Publish Artifact: apk'
-    #   inputs:
-    #     PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.apk'
-    #     ArtifactName: APK
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: aab'
       inputs:
