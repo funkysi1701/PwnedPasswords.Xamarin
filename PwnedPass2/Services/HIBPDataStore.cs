@@ -17,7 +17,7 @@ namespace PwnedPass2.Services
         public IEnumerable<HIBP> items;
         public IEnumerable<HIBP> emails;
         public string passwords;
-        private IConfiguration config;
+        private readonly IConfiguration config;
         public HIBPDataStore()
         {
             config = AppContainer.Container.Resolve<IConfiguration>();
