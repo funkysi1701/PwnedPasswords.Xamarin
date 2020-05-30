@@ -5,6 +5,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace PwnedPass2.Droid
 {
@@ -22,6 +23,13 @@ namespace PwnedPass2.Droid
             try
             {
                 client.DefaultRequestHeaders.Add("Version", version);
+                client.DefaultRequestHeaders.Add("Idiom", DeviceInfo.Idiom.ToString());
+                client.DefaultRequestHeaders.Add("DeviceType", DeviceInfo.DeviceType.ToString());
+                client.DefaultRequestHeaders.Add("Manufacturer", DeviceInfo.Manufacturer);
+                client.DefaultRequestHeaders.Add("Model", DeviceInfo.Model);
+                client.DefaultRequestHeaders.Add("Name", DeviceInfo.Name);
+                client.DefaultRequestHeaders.Add("Platform", DeviceInfo.Platform.ToString());
+                client.DefaultRequestHeaders.Add("VersionString", DeviceInfo.VersionString);
                 return client.GetAsync(url).Result;
             }
             catch (Exception e)
