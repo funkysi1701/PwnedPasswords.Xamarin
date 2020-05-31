@@ -23,13 +23,23 @@ namespace PwnedPass2.Droid
             try
             {
                 client.DefaultRequestHeaders.Add("Version", version);
+                client.DefaultRequestHeaders.Add("URL", url);
                 client.DefaultRequestHeaders.Add("Idiom", DeviceInfo.Idiom.ToString());
                 client.DefaultRequestHeaders.Add("DeviceType", DeviceInfo.DeviceType.ToString());
                 client.DefaultRequestHeaders.Add("Manufacturer", DeviceInfo.Manufacturer);
                 client.DefaultRequestHeaders.Add("Model", DeviceInfo.Model);
                 client.DefaultRequestHeaders.Add("Name", DeviceInfo.Name);
                 client.DefaultRequestHeaders.Add("Platform", DeviceInfo.Platform.ToString());
-                client.DefaultRequestHeaders.Add("VersionString", DeviceInfo.VersionString);
+                client.DefaultRequestHeaders.Add("OSVersionString", DeviceInfo.VersionString);
+                client.DefaultRequestHeaders.Add("Density", DeviceDisplay.MainDisplayInfo.Density.ToString());
+                client.DefaultRequestHeaders.Add("Height", DeviceDisplay.MainDisplayInfo.Height.ToString());
+                client.DefaultRequestHeaders.Add("Orientation", DeviceDisplay.MainDisplayInfo.Orientation.ToString());
+                client.DefaultRequestHeaders.Add("Rotation", DeviceDisplay.MainDisplayInfo.Rotation.ToString());
+                client.DefaultRequestHeaders.Add("Width", DeviceDisplay.MainDisplayInfo.Width.ToString());
+                client.DefaultRequestHeaders.Add("BuildString", AppInfo.BuildString);
+                client.DefaultRequestHeaders.Add("AppName", AppInfo.Name);
+                client.DefaultRequestHeaders.Add("PackageName", AppInfo.PackageName);
+                client.DefaultRequestHeaders.Add("AppBuildString", AppInfo.BuildString);
                 return client.GetAsync(url).Result;
             }
             catch (Exception e)
