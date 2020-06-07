@@ -61,6 +61,7 @@ namespace PwnedPass2.Models
             {
                 if (hibp.Id != 0)
                 {
+                    hibp.Id = 0;
                     this.database.Delete(hibp);
                     this.database.Insert(hibp);
                     return hibp.Id;

@@ -20,19 +20,13 @@ namespace PwnedPass2
             int count = 0;
             try
             {
-                var table = App.Database.GetHIBP();
-
-                count = table.TotalBreaches;
+                count = await Cache.GetBreach();
             }
             catch (Exception e)
             {
                 DependencyService.Get<ILog>().SendTracking("Error");
                 DependencyService.Get<ILog>().SendTracking(e.Message, e);
                 await Cache.SaveData();
-            }
-            if (count == 0)
-            {
-                count = await Cache.GetBreach();
             }
             return count.ToString() + " data breaches";
         }
@@ -41,14 +35,12 @@ namespace PwnedPass2
         /// GetAccountsRaw
         /// </summary>
         /// <returns>long</returns>
-        public static long GetAccountsRaw()
+        public static async Task<long> GetAccountsRaw()
         {
             long count = 0;
             try
             {
-                var table = App.Database.GetHIBP();
-
-                count = table.TotalAccounts;
+                count = await Cache.GetAccounts();
             }
             catch (Exception e)
             {
@@ -66,11 +58,7 @@ namespace PwnedPass2
         public static async Task<string> GetAccounts()
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Accounts from Cache");
-            long count = GetAccountsRaw();
-            if (count == 0)
-            {
-                count = await Cache.GetAccounts();
-            }
+            long count = await GetAccountsRaw();
             return string.Format("{0:n0}", count) + " pwned accounts";
         }
     }

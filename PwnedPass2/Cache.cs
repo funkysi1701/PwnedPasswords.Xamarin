@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using System;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PwnedPass2
@@ -56,8 +56,13 @@ namespace PwnedPass2
         public static async Task<long> GetAccounts()
         {
             var config = AppContainer.Container.Resolve<IConfiguration>();
-            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
+            var networkAccess = Connectivity.NetworkAccess;
+            string result = null;
             long count = 0;
+            if (networkAccess == NetworkAccess.Internet)
+            {
+                result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
+            }
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);
@@ -81,8 +86,13 @@ namespace PwnedPass2
         public static async Task<int> GetBreach()
         {
             var config = AppContainer.Container.Resolve<IConfiguration>();
-            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
+            var networkAccess = Connectivity.NetworkAccess;
+            string result = null;
             int count = 0;
+            if (networkAccess == NetworkAccess.Internet)
+            {
+                result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
+            }
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);
