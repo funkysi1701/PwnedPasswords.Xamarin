@@ -1,6 +1,7 @@
 ﻿using PwnedPass2.Interfaces;
 using PwnedPasswords.Core;
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -17,8 +18,33 @@ namespace PwnedPass2.Models
             this.database = DependencyService.Get<ISQLite>().GetConnection();
 
             this.database.CreateTable<HIBP>();
+            this.database.CreateTable<UniqueId>();
             this.database.CreateTable<HIBPTotals>();
             this.database.CreateTable<LastEmail>();
+        }
+
+        public void SaveUniqueId(UniqueId id)
+        {
+            lock (Locker)
+            {
+                try
+                {
+                    this.database.Insert(id);
+                }
+                catch(Exception e)
+                {
+                    
+                }
+            }
+        }
+
+        public UniqueId GetUniqueId()
+        {
+            lock (Locker)
+            {
+                return (from c in this.database.Table<UniqueId>()
+                        select c).FirstOrDefault();
+            }
         }
 
         public int SaveDataBreach(HIBP hibpmodel)

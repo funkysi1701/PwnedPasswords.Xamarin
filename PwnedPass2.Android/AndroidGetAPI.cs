@@ -22,6 +22,7 @@ namespace PwnedPass2.Droid
             DependencyService.Get<ILog>().SendTracking("GetAsyncAPI " + url);
             try
             {
+                client.DefaultRequestHeaders.Add("Id", App.Database.GetUniqueId().Id.ToString());
                 client.DefaultRequestHeaders.Add("Version", version);
                 client.DefaultRequestHeaders.Add("URL", url);
                 client.DefaultRequestHeaders.Add("Idiom", DeviceInfo.Idiom.ToString());
