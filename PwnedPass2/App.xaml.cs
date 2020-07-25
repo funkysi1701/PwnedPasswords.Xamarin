@@ -53,6 +53,7 @@ namespace PwnedPass2
         {
             AppCenter.Start("uwp=f497a9fd-3c8b-4072-87ea-2b6e8d057a52;" + "android=29b4ff89-6554-4d25-bb78-93cd14a3b280;", typeof(Analytics), typeof(Crashes));
             var item = new UniqueId();
+            GetDatabase();
             App.Database.SaveUniqueId(item);
             if (!stopWatch.IsRunning)
             {
