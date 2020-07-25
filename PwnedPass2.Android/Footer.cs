@@ -4,9 +4,9 @@ using PwnedPass2.Interfaces;
 using PwnedPass2.Views;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(PwnedPass2.Droid.Footer))]
+[assembly: Dependency(typeof(PwnedPass2.Android.Footer))]
 
-namespace PwnedPass2.Droid
+namespace PwnedPass2.Android
 {
     public class Footer : IFooter
     {

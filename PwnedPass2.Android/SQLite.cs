@@ -2,9 +2,9 @@
 using SQLite;
 using System.IO;
 
-[assembly: Xamarin.Forms.Dependency(typeof(PwnedPass2.Droid.SQLite))]
+[assembly: Xamarin.Forms.Dependency(typeof(PwnedPass2.Android.SQLite))]
 
-namespace PwnedPass2.Droid
+namespace PwnedPass2.Android
 {
     public class SQLite : ISQLite
     {

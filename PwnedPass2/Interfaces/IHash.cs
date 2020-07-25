@@ -2,6 +2,6 @@
 {
     public interface IHash
     {
-        string GetHash(string input);
+        string Get(string input);
     }
 }

@@ -38,7 +38,7 @@ namespace PwnedPass2.ViewModels
             try
             {
                 Passwords.Clear();
-                string hash = App.GetHash.GetHash(password);
+                string hash = App.GetHash.Get(password);
                 var items = await DataStore.GetPasswordAsync(hash);
                 Passwords.Add(items);
             }

@@ -1,15 +1,12 @@
 ﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPass2.Services;
 using PwnedPass2.Views;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -19,7 +16,7 @@ namespace PwnedPass2
     {
         public static IAPI GetAPI { get; private set; }
         public static IHash GetHash { get; private set; }
-        private static Database database { get; set; }
+        public static Database Database { get; set; }
         private static readonly Stopwatch stopWatch = new Stopwatch();
         private const int defaultTimespan = 5;
 
@@ -30,6 +27,16 @@ namespace PwnedPass2
 
             DependencyService.Register<HIBPDataStore>();
             MainPage = new MainPage();
+        }
+
+        public static Database GetDatabase()
+        {
+            if (Database == null)
+            {
+                Database = new Database();
+            }
+
+            return Database;
         }
 
         public static void InitAPI(IAPI apiImplementation)
@@ -81,19 +88,6 @@ namespace PwnedPass2
         {
             // Handle when your app sleeps
             stopWatch.Reset();
-        }
-
-        public static Database Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new Database();
-                }
-
-                return database;
-            }
         }
 
         protected override void OnResume()

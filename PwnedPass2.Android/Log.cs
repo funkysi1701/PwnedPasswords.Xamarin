@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(PwnedPass2.Droid.AndroidLog))]
+[assembly: Dependency(typeof(PwnedPass2.Android.Log))]
 
-namespace PwnedPass2.Droid
+namespace PwnedPass2.Android
 {
-    public class AndroidLog : ILog
+    public class Log : ILog
     {
         /// <summary>
         /// SendTracking.

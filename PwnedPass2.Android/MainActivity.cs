@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
 
-namespace PwnedPass2.Droid
+namespace PwnedPass2.Android
 {
     [Activity(Label = "Pwned Pass", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -18,8 +18,8 @@ namespace PwnedPass2.Droid
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            App.InitHash(new AndroidGetHash());
-            App.InitAPI(new AndroidGetAPI());
+            App.InitHash(new Hash());
+            App.InitAPI(new GetAPI());
             LoadApplication(new App(new AppSetup()));
         }
 
@@ -30,7 +30,7 @@ namespace PwnedPass2.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
+        public void OnActivityCreated(Activity activity)
         {
             CrossCurrentActivity.Current.Activity = activity;
         }

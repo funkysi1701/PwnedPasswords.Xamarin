@@ -2,11 +2,11 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PwnedPass2.Droid
+namespace PwnedPass2.Android
 {
-    public class AndroidGetHash : IHash
+    public class Hash : IHash
     {
-        public string GetHash(string input)
+        public string Get(string input)
         {
             using (var sha1 = SHA1.Create())
             {

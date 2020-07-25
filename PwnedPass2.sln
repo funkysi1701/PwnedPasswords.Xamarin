@@ -36,4 +36,7 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {665C2309-7764-435E-8B7D-1791BF91EA12}
 	EndGlobalSection
+	GlobalSection(NDepend) = preSolution
+		Project = ".\PwnedPass21.ndproj"
+	EndGlobalSection
 EndGlobal
