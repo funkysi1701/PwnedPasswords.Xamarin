@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PwnedPass2.Services
@@ -31,7 +30,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetAPI.GetHIBP(config.APIURL + "/api/v2/HIBP/GetBreaches");
+            string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<HIBPResult>(result);

@@ -1,7 +1,4 @@
-﻿using Autofac;
-using PwnedPass2.Interfaces;
-using PwnedPass2.Models;
-using PwnedPasswords.Core;
+﻿using PwnedPass2.Interfaces;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
