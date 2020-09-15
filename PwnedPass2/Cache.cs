@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
+using PwnedPasswords.Core;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -38,8 +40,8 @@ namespace PwnedPass2
                     string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
                     if (result != null && result.Length > 0)
                     {
-                        var job = JsonConvert.DeserializeObject<HIBPResult>(result);
-                        foreach (var item in job.HIBP)
+                        var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
+                        foreach (var item in job)
                         {
                             App.Database.SaveDataBreach(item);
                         }
@@ -64,9 +66,9 @@ namespace PwnedPass2
             }
             if (result != null && result.Length > 0)
             {
-                var job = JsonConvert.DeserializeObject<HIBPResult>(result);
+                var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
 
-                foreach (var item in job.HIBP)
+                foreach (var item in job)
                 {
                     count += item.PwnCount;
                 }
@@ -93,9 +95,9 @@ namespace PwnedPass2
             }
             if (result != null && result.Length > 0)
             {
-                var job = JsonConvert.DeserializeObject<HIBPResult>(result);
+                var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
 
-                foreach (var item in job.HIBP)
+                foreach (var item in job)
                 {
                     count++;
                 }

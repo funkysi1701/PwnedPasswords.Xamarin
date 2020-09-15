@@ -33,12 +33,12 @@ namespace PwnedPass2.Services
             string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
             if (result != null && result.Length > 0)
             {
-                var job = JsonConvert.DeserializeObject<HIBPResult>(result);
-                foreach (var item in job.HIBP)
+                var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
+                foreach (var item in job)
                 {
                     item.Description = item.Description.ToString().Replace("&quot;", "'"); //Regex.Replace(, "<.*?>", string.Empty);
                 }
-                items = job.HIBP.OrderByDescending(s => s.AddedDate).ToList();
+                items = job.OrderByDescending(s => s.AddedDate).ToList();
             }
             else
             {

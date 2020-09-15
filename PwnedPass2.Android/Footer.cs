@@ -30,6 +30,7 @@ namespace PwnedPass2.Android
                 TextColor = Color.Black,
                 BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
+                TextTransform = TextTransform.None
             };
 
             about.Clicked += mainPage.Clicked;
@@ -45,6 +46,7 @@ namespace PwnedPass2.Android
                 TextColor = Color.Black,
                 BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
+                TextTransform = TextTransform.None
             };
 
             about.Clicked += mainPage.Clicked;
@@ -60,6 +62,7 @@ namespace PwnedPass2.Android
                 TextColor = Color.Black,
                 BackgroundColor = Color.White,
                 FontSize = Device.GetNamedSize(NamedSize.Small, mainPage),
+                TextTransform = TextTransform.None
             };
 
             about.Clicked += mainPage.Clicked;
