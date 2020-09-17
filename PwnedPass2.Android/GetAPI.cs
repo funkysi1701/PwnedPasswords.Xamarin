@@ -4,8 +4,8 @@ using PwnedPass2.Interfaces;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace PwnedPass2.Android
 {
@@ -68,6 +68,7 @@ namespace PwnedPass2.Android
             client.DefaultRequestHeaders.Add("AppName", AppInfo.Name);
             client.DefaultRequestHeaders.Add("PackageName", AppInfo.PackageName);
             client.DefaultRequestHeaders.Add("AppBuildString", AppInfo.BuildString);
+            client.DefaultRequestHeaders.Add("hibp-api-key", "404575e5c86c499fa4541e61acedbe4b");
             return client;
         }
 

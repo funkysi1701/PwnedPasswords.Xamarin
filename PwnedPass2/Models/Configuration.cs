@@ -11,8 +11,6 @@ namespace PwnedPass2.Models
 
         }
 
-        public string APIURL { get; set; }
-
         public bool Beta { get; set; }
     }
 }
