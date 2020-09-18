@@ -31,7 +31,7 @@ namespace PwnedPass2.Models
                 {
                     this.database.Insert(id);
                 }
-                catch(Exception e)
+                catch
                 {
                     
                 }
