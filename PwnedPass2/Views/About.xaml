@@ -68,7 +68,7 @@
                               TextDecorations="Underline">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ClickCommand}"
-                                          CommandParameter="https://dev.funkysi1701.com/" />
+                                          CommandParameter="https://www.funkysi1701.com/" />
                                 </Span.GestureRecognizers>
                             </Span>
                             <Span Text=", who is a Developer working in the North of England. He has been working in IT departments for over 13 years and has a wide range of experience. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Large" />

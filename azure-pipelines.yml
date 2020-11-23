@@ -15,6 +15,10 @@ stages:
   jobs:
   - job: buildapp
     steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '3.x'
     # - task: PowerShell@2
     #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
     #   inputs: 

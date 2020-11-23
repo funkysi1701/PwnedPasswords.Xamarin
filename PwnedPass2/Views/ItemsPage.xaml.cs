@@ -22,7 +22,7 @@ namespace PwnedPass2.Views
         {
             InitializeComponent();
             BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, true, "AddedDate");
+            BindingContext = viewModel = new ItemsViewModel(BreachInp, false, "AddedDate");
             DependencyService.Get<IFooter>().AddFooter(this, this.stack);
         }
 
