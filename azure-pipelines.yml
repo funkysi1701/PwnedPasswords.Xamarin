@@ -1,50 +1,59 @@
 pool:
   vmImage: 'windows-2019'
+
 trigger:
   batch: true
   branches:
     include:
     - develop
     - master
+
 variables:
   Parameters.configuration: 'Release'
   outputDirectory: '$(build.binariesDirectory)/$(Parameters.configuration)'
+
 name: 3.$(Build.BuildId)$(Rev:.r).0
+
 stages:
+
 - stage: BuildApp
   jobs:
+
   - job: buildapp
     steps:
+
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
         version: '3.x'
-    # - task: PowerShell@2
-    #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-    #   inputs: 
-    #    targetType: 'inline'
-    #    script: 'Copy $(Build.SourcesDirectory)\PwnedPass2\Configuration-Source\Debug\config.json $(Build.SourcesDirectory)\PwnedPass2\Configuration\config.json'
+
     - task: PowerShell@2
       inputs: 
        targetType: 'inline'
        script: 'Copy $(Build.SourcesDirectory)\PwnedPass2\Configuration-Source\Release\config.json $(Build.SourcesDirectory)\PwnedPass2\Configuration\config.json'       
+
     - task: DownloadSecureFile@1
       inputs:
         secureFile: simon2.keystore
+
     - task: DownloadSecureFile@1
       inputs:
         secureFile: zipalign2.bat
+
     - task: DownloadSecureFile@1
       inputs:
         secureFile: zipalign3.bat
+
     - script: '(echo $(Build.BuildNumber) && echo $(Build.BuildId)) > .buildinfo.json'
       displayName: 'Emit build number'
       workingDirectory: '$(Build.SourcesDirectory)/PwnedPass2'
       failOnStderr: true
+
     - task: NuGetToolInstaller@0
       displayName: 'Install Nuget'
       inputs:
         versionSpec: 4.9.2
+
     - task: NuGetCommand@2
       displayName: 'NuGet restore'
       inputs:
@@ -53,6 +62,16 @@ stages:
         feedsToUse: 'select'
         vstsFeed: '2c2a6a60-448c-4153-a1be-d2ce39bfbb0d'
         restoreDirectory: 'packages'
+
+    - task: SonarCloudPrepare@1 
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'funkysi1701'
+        scannerMode: 'MSBuild'
+        projectKey: 'PwnedPass'
+        projectName: 'PwnedPass'
+        projectVersion: '$(Build.BuildId)'
+
     - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
       displayName: 'versionCode'
       inputs:
@@ -66,6 +85,7 @@ stages:
         customReplaceRegex: 'versionCode="\d+'
         buildRegexIndex: 1
         replacePrefix: 'versionCode="'  
+
     - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
       displayName: 'versionName'
       inputs:
@@ -79,6 +99,7 @@ stages:
         customReplaceRegex: 'versionName="3.\d+'
         buildRegexIndex: 1
         replacePrefix: 'versionName="3.'
+
     - task: XamarinAndroid@1
       displayName: 'Build Xamarin.Android'
       inputs:
@@ -88,6 +109,7 @@ stages:
         msbuildVersionOption: 'latest'
         msbuildArchitectureOption: 'x64'
         jdkOption: 'JDKVersion'
+
     - powershell: |
         $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
         Write-host $temp
@@ -96,26 +118,32 @@ stages:
         Write-Output ("##vso[task.setvariable variable=AndroidVer;]$temp")
         Write-host $AndroidVer
       displayName: 'Set Android Version'
+
     - script: '$(Agent.TempDirectory)\zipalign3.bat'
       displayName: 'zipalign Script'
+
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: aab'
       inputs:
         PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.aab'
         ArtifactName: AAB
+
     - task: PowerShell@2
       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
       inputs:
         targetType: 'inline'
         script: '
         Add-Content -Path $(Build.Repository.LocalPath)\release.txt -Value "$(Build.SourceVersionMessage)" -Encoding "utf8"'
+
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: release notes'
       inputs:
         PathtoPublish: '$(Build.Repository.LocalPath)\release.txt'
         ArtifactName: release
+
     - task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@18
       displayName: 'WhiteSource Bolt'
+
     - task: dependency-checker@1
       inputs:
         path: '$(Build.SourcesDirectory)'
@@ -129,3 +157,9 @@ stages:
         reportPath: '$(Build.ArtifactStagingDirectory)\dependencies.html'
       env:
         SYSTEM_ACCESSTOKEN: $(system.accesstoken)     
+
+    - task: SonarCloudAnalyze@1
+
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'                
