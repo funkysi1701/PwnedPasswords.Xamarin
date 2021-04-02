@@ -42,7 +42,6 @@ namespace PwnedPass2.Views
                 var lastIndex = 0;
                 foreach (Match item in collection)
                 {
-                    var foundText = item.Value;
                     sections.Add(new StringSection() { Text = (item2.Text.Substring(lastIndex, item.Index - lastIndex).Replace("&amp;", "&")).Replace("&mdash;", "-") });
                     lastIndex += item.Index - lastIndex + item.Length;
 
@@ -56,7 +55,7 @@ namespace PwnedPass2.Views
 
                     sections.Add(html);
                 }
-                sections.Add(new StringSection() { Text = (item2.Text.Substring(lastIndex).Replace("&amp;", "&")).Replace("&mdash;","-") });
+                sections.Add(new StringSection() { Text = (item2.Text.Substring(lastIndex).Replace("&amp;", "&")).Replace("&mdash;", "-") });
             }
 
             return sections;
@@ -111,7 +110,6 @@ namespace PwnedPass2.Views
 
             foreach (Match item in collection)
             {
-                var foundText = item.Value;
                 sections.Add(new StringSection() { Text = rawText.Substring(lastIndex, item.Index - lastIndex) });
                 lastIndex += item.Index - lastIndex + item.Length;
 
