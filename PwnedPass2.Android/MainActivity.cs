@@ -19,7 +19,7 @@ namespace PwnedPass2.Android
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             App.InitHash(new Hash());
-            App.InitAPI(new GetAPI());
+            App.InitAPI(new GetApi());
             LoadApplication(new App(new AppSetup()));
         }
 

@@ -17,8 +17,7 @@ namespace PwnedPass2
         {
             try
             {
-                var config = AppContainer.Container.Resolve<IConfiguration>();
-                HIBPTotals data = new HIBPTotals();
+                HibpTotals data = new HibpTotals();
                 long acc = await GetAccounts();
                 int bre = await GetBreach();
                 if (acc > 1)

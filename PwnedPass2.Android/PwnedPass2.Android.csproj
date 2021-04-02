@@ -114,7 +114,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetAPI.cs" />
+    <Compile Include="GetApi.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="AppRating.cs" />

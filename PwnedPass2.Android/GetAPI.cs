@@ -9,14 +9,14 @@ using Xamarin.Forms;
 
 namespace PwnedPass2.Android
 {
-    public class GetAPI : IAPI
+    public class GetApi : IApi
     {
         /// <summary>
         /// GetAsyncAPI.
         /// </summary>
         /// <param name="url">url goes here.</param>
         /// <returns>HttpResponseMessage.</returns>
-        public HttpResponseMessage GetAsyncAPI(string url,string version)
+        public HttpResponseMessage GetAsyncAPI(string url, string version)
         {
             HttpClient client = new HttpClient();
             DependencyService.Get<ILog>().SendTracking("GetAsyncAPI " + url);
@@ -33,6 +33,7 @@ namespace PwnedPass2.Android
                 return new HttpResponseMessage();
             }
         }
+
         private HttpClient GetDeviceInfoHeaders(HttpClient client)
         {
             client.DefaultRequestHeaders.Add("Idiom", DeviceInfo.Idiom.ToString());

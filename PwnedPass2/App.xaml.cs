@@ -14,7 +14,7 @@ namespace PwnedPass2
 {
     public partial class App : Application
     {
-        public static IAPI GetAPI { get; private set; }
+        public static IApi GetAPI { get; private set; }
         public static IHash GetHash { get; private set; }
         public static Database Database { get; set; }
         private static readonly Stopwatch stopWatch = new Stopwatch();
@@ -25,7 +25,7 @@ namespace PwnedPass2
             AppContainer.Container = setup.CreateContainer();
             InitializeComponent();
 
-            DependencyService.Register<HIBPDataStore>();
+            DependencyService.Register<HibpDataStore>();
             MainPage = new MainPage();
         }
 
@@ -39,7 +39,7 @@ namespace PwnedPass2
             return Database;
         }
 
-        public static void InitAPI(IAPI apiImplementation)
+        public static void InitAPI(IApi apiImplementation)
         {
             App.GetAPI = apiImplementation;
         }
@@ -66,14 +66,15 @@ namespace PwnedPass2
 
                 if (stopWatch.IsRunning && stopWatch.Elapsed.Minutes >= defaultTimespan)
                 {
-                    //prepare to perform your data pull here as we have hit the 1 minute mark   
+                    //prepare to perform your data pull here as we have hit the 1 minute mark
                     Task.Run(async () =>
                     {
                         await Cache.SaveData();
                     });
                     // Perform your long running operations here.
 
-                    Xamarin.Forms.Device.InvokeOnMainThreadAsync(() => {
+                    Xamarin.Forms.Device.InvokeOnMainThreadAsync(() =>
+                    {
                         // If you need to do anything with your UI, you need to wrap it in this.
                     });
 

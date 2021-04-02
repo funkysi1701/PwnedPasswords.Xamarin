@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PwnedPass2.Interfaces
 {
-    public interface IAPI
+    public interface IApi
     {
         /// <summary>
         /// GetHIBP.

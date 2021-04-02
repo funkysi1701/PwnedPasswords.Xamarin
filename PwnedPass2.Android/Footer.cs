@@ -10,17 +10,18 @@ namespace PwnedPass2.Android
 {
     public class Footer : IFooter
     {
-        private readonly IConfiguration config;
         private readonly string beta;
+
         public Footer()
         {
-            config = AppContainer.Container.Resolve<IConfiguration>();
+            IConfiguration config = AppContainer.Container.Resolve<IConfiguration>();
             beta = string.Empty;
             if (config.Beta)
             {
                 beta = " Beta Version";
             }
         }
+
         public void AddFooter(ItemsPage mainPage, StackLayout stack)
         {
             var context = CrossCurrentActivity.Current.Activity;

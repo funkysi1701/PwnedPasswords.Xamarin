@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Newtonsoft.Json;
-using PwnedPass2.Interfaces;
+﻿using Newtonsoft.Json;
 using PwnedPass2.Models;
 using PwnedPasswords.Core;
 using System;
@@ -8,16 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PwnedPass2.Services
 {
-    public class HIBPDataStore : IDataStore<HIBP>
+    public class HibpDataStore : IDataStore<HIBP>
     {
-        public IEnumerable<HIBP> items;
-        public IEnumerable<HIBP> emails;
-        public string passwords;
+        private IEnumerable<HIBP> items;
+        private IEnumerable<HIBP> emails;
 
         public async Task<HIBP> GetItemAsync(string id)
         {
@@ -32,7 +28,7 @@ namespace PwnedPass2.Services
                 var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
                 foreach (var item in job)
                 {
-                    item.Description = item.Description.ToString().Replace("&quot;", "'"); //Regex.Replace(, "<.*?>", string.Empty);
+                    item.Description = item.Description.ToString().Replace("&quot;", "'");
                 }
                 items = job.OrderByDescending(s => s.AddedDate).ToList();
             }
@@ -40,7 +36,7 @@ namespace PwnedPass2.Services
             {
                 var table = App.Database.GetAll();
                 var hibp = new List<HIBP>();
-                
+
                 foreach (var item in table)
                 {
                     var temp = new HIBP
@@ -79,7 +75,7 @@ namespace PwnedPass2.Services
         {
             string result = await App.GetAPI.GetHIBP("https://api.pwnedpasswords.com/range/" + hash.Substring(0, 5));
             var passwords = new Passwords();
-            if(string.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result))
             {
                 passwords.Text = "No Connection, Please reconnect to the internet to check if this password has been pwned";
                 passwords.BgColor = Color.DarkOrange;
