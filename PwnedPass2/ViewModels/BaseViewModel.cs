@@ -1,5 +1,4 @@
-﻿using PwnedPass2.Models;
-using PwnedPass2.Services;
+﻿using PwnedPass2.Services;
 using PwnedPasswords.Core;
 using System;
 using System.Collections.Generic;
@@ -30,8 +29,8 @@ namespace PwnedPass2.ViewModels
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName] string propertyName = "",
-            Action onChanged = null)
+            Action onChanged = null,
+            [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
