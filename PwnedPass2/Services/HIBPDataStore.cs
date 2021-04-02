@@ -22,7 +22,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+            string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
@@ -73,7 +73,7 @@ namespace PwnedPass2.Services
 
         public async Task<Passwords> GetPasswordAsync(string hash)
         {
-            string result = await App.GetAPI.GetHIBP("https://api.pwnedpasswords.com/range/" + hash.Substring(0, 5));
+            string result = await App.GetApi.GetHIBP("https://api.pwnedpasswords.com/range/" + hash.Substring(0, 5));
             var passwords = new Passwords();
             if (string.IsNullOrEmpty(result))
             {
@@ -97,7 +97,7 @@ namespace PwnedPass2.Services
 
         public async Task<IEnumerable<HIBP>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breachedaccount/" + emailsInp + "?truncateResponse=false");
+            string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breachedaccount/" + emailsInp + "?truncateResponse=false");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<List<HIBP>>(result);

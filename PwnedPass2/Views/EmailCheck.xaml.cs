@@ -123,19 +123,6 @@ namespace PwnedPass2.Views
             emailEntry.Text = EmailInp;
         }
 
-        private void Search(object sender, EventArgs e)
-        {
-            EmailInp = emailEntry.Text;
-            BindingContext = viewModel = new EmailViewModel(EmailInp, Order, "AddedDate");
-            var lastemail = viewModel.LoadLastEmail();
-            if (lastemail != null && !string.IsNullOrEmpty(lastemail.Email) && string.IsNullOrEmpty(EmailInp))
-            {
-                EmailInp = lastemail.Email;
-            }
-            viewModel.LoadEmailsCommand.Execute(null);
-            emailEntry.Text = EmailInp;
-        }
-
         public async void Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new About());

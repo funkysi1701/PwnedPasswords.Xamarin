@@ -36,7 +36,7 @@ namespace PwnedPass2
                     data.Id = 1;
                     App.Database.SaveHIBP(data);
                     App.Database.EmptyDataBreach();
-                    string result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                    string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
                     if (result != null && result.Length > 0)
                     {
                         var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
@@ -61,7 +61,7 @@ namespace PwnedPass2
             long count = 0;
             if (networkAccess == NetworkAccess.Internet)
             {
-                result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
             }
             if (result != null && result.Length > 0)
             {
@@ -90,7 +90,7 @@ namespace PwnedPass2
             int count = 0;
             if (networkAccess == NetworkAccess.Internet)
             {
-                result = await App.GetAPI.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
             }
             if (result != null && result.Length > 0)
             {

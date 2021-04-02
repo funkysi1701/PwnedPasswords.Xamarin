@@ -14,7 +14,7 @@ namespace PwnedPass2
 {
     public partial class App : Application
     {
-        public static IApi GetAPI { get; private set; }
+        public static IApi GetApi { get; private set; }
         public static IHash GetHash { get; private set; }
         public static Database Database { get; set; }
         private static readonly Stopwatch stopWatch = new Stopwatch();
@@ -41,7 +41,7 @@ namespace PwnedPass2
 
         public static void InitAPI(IApi apiImplementation)
         {
-            App.GetAPI = apiImplementation;
+            App.GetApi = apiImplementation;
         }
 
         public static void InitHash(IHash hashImplementation)

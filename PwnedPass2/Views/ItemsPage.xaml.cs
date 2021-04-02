@@ -101,14 +101,6 @@ namespace PwnedPass2.Views
             breachEntry.Text = BreachInp;
         }
 
-        private void Search(object sender, EventArgs e)
-        {
-            BreachInp = breachEntry.Text;
-            BindingContext = viewModel = new ItemsViewModel(BreachInp, Order, "AddedDate");
-            viewModel.LoadItemsCommand.Execute(null);
-            breachEntry.Text = BreachInp;
-        }
-
         public async void Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new About());
