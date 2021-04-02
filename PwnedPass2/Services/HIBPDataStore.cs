@@ -95,9 +95,9 @@ namespace PwnedPass2.Services
             return await Task.FromResult(passwords);
         }
 
-        public async Task<IEnumerable<HIBP>> GetEmailsAsync(string emailsInp, string orderby, bool orderdir, bool forceRefresh = false)
+        public async Task<IEnumerable<HIBP>> GetEmailsAsync(string email, string orderby, bool orderdir, bool forceRefresh = false)
         {
-            string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breachedaccount/" + emailsInp + "?truncateResponse=false");
+            string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breachedaccount/" + email + "?truncateResponse=false");
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
