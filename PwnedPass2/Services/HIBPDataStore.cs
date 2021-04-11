@@ -111,10 +111,11 @@ namespace PwnedPass2.Services
             {
                 var error = new HIBP
                 {
-                    Title = "No Connection",
-                    Description = "Please reconnect to the internet to check if this email has been pwned",
+                    Title = "No Breaches Found",
+                    Description = "",
                     PwnCount = 0,
-                    AddedDate = DateTime.UtcNow
+                    AddedDate = DateTime.UtcNow,
+                    BreachDate = DateTime.UtcNow
                 };
 
                 var emailsmodel = new List<HIBP>
