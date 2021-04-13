@@ -3,7 +3,6 @@ using PwnedPass2.Models;
 using PwnedPasswords.Core;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -21,6 +20,8 @@ namespace PwnedPass2.ViewModels
         public string Breach { get; set; }
         public string Account { get; set; }
 
+        private readonly string Url = "https://haveibeenpwned.com/api/v3/breaches";
+
         public EmailViewModel(string EmailInp, bool order, string orderby)
         {
             Title = "';** pwned pass";
@@ -34,12 +35,12 @@ namespace PwnedPass2.ViewModels
 
         private async Task<string> SetAccount()
         {
-            return await Page.GetAccounts();
+            return await Page.GetAccounts(Url);
         }
 
         private async Task<string> SetBreach()
         {
-            return await Page.GetBreach();
+            return await Page.GetBreach(Url);
         }
 
         private void SetSort(bool order, string orderby)
@@ -103,7 +104,7 @@ namespace PwnedPass2.ViewModels
                 Breach = await SetBreach();
                 Account = await SetAccount();
                 Emails.Clear();
-                if(email != null)
+                if (email != null)
                 {
                     var items = await DataStore.GetEmailsAsync(email, orderby, sortdir, true);
                     SaveLastEmail(email);

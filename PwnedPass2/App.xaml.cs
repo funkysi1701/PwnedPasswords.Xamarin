@@ -19,6 +19,7 @@ namespace PwnedPass2
         public static Database Database { get; set; }
         private static readonly Stopwatch stopWatch = new Stopwatch();
         private const int defaultTimespan = 5;
+        private readonly string Url = "https://haveibeenpwned.com/api/v3/breaches";
 
         public App(AppSetup setup)
         {
@@ -69,7 +70,7 @@ namespace PwnedPass2
                     //prepare to perform your data pull here as we have hit the 1 minute mark
                     Task.Run(async () =>
                     {
-                        await Cache.SaveData();
+                        await Cache.SaveData(Url);
                     });
                     // Perform your long running operations here.
 

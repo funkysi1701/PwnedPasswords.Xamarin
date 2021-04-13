@@ -1,7 +1,4 @@
-﻿using Autofac;
-using PwnedPass2.Interfaces;
-using PwnedPass2.Models;
-using PwnedPasswords.Core;
+﻿using PwnedPass2.Interfaces;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,19 +11,19 @@ namespace PwnedPass2
         /// GetBreach
         /// </summary>
         /// <returns>string</returns>
-        public static async Task<string> GetBreach()
+        public static async Task<string> GetBreach(string url)
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Breaches from Cache");
             int count = 0;
             try
             {
-                count = await Cache.GetBreach();
+                count = await Cache.GetBreach(url);
             }
             catch (Exception e)
             {
                 DependencyService.Get<ILog>().SendTracking("Error");
                 DependencyService.Get<ILog>().SendTracking(e.Message, e);
-                await Cache.SaveData();
+                await Cache.SaveData(url);
             }
             return count.ToString() + " data breaches";
         }
@@ -35,12 +32,12 @@ namespace PwnedPass2
         /// GetAccountsRaw
         /// </summary>
         /// <returns>long</returns>
-        public static async Task<long> GetAccountsRaw()
+        public static async Task<long> GetAccountsRaw(string url)
         {
             long count = 0;
             try
             {
-                count = await Cache.GetAccounts();
+                count = await Cache.GetAccounts(url);
             }
             catch (Exception e)
             {
@@ -55,10 +52,10 @@ namespace PwnedPass2
         /// GetAccounts
         /// </summary>
         /// <returns>string</returns>
-        public static async Task<string> GetAccounts()
+        public static async Task<string> GetAccounts(string url)
         {
             DependencyService.Get<ILog>().SendTracking("Get Number of Accounts from Cache");
-            long count = await GetAccountsRaw();
+            long count = await GetAccountsRaw(url);
             return string.Format("{0:n0}", count) + " pwned accounts";
         }
     }

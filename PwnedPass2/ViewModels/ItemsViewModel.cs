@@ -1,8 +1,5 @@
 ﻿using Autofac;
-using PwnedPass2.Interfaces;
-using PwnedPass2.Models;
 using PwnedPasswords.Core;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +17,13 @@ namespace PwnedPass2.ViewModels
         public string Breach { get; set; }
         public string Account { get; set; }
 
+        private readonly string Url = "https://haveibeenpwned.com/api/v3/breaches";
+
         public ItemsViewModel(string filter, bool order, string orderby)
         {
             Title = "';** pwned pass";
             Items = new ObservableCollection<HIBP>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby, filter));
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(order, orderby, filter, Url));
             SetSort(order, orderby);
             SetSort(order, orderby);
             SetSort(order, orderby);
@@ -34,12 +33,12 @@ namespace PwnedPass2.ViewModels
 
         private async Task<string> SetAccount()
         {
-            return await Page.GetAccounts();
+            return await Page.GetAccounts(Url);
         }
 
         private async Task<string> SetBreach()
         {
-            return await Page.GetBreach();
+            return await Page.GetBreach(Url);
         }
 
         private void SetSort(bool order, string orderby)
@@ -91,7 +90,7 @@ namespace PwnedPass2.ViewModels
             }
         }
 
-        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby, string filter)
+        private async Task ExecuteLoadItemsCommand(bool sortdir, string orderby, string filter, string url)
         {
             if (IsBusy)
                 return;
@@ -101,7 +100,7 @@ namespace PwnedPass2.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(orderby, sortdir, true);
+                var items = await DataStore.GetItemsAsync(orderby, sortdir, url, true);
                 if (filter != null)
                 {
                     items = items.Where(x => x.Description.ToLower().Contains(filter.ToLower()) || x.Title.ToLower().Contains(filter.ToLower()) || x.Name.ToLower().Contains(filter.ToLower()));

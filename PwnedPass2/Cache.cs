@@ -1,5 +1,4 @@
-﻿using Autofac;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PwnedPass2.Interfaces;
 using PwnedPass2.Models;
 using PwnedPasswords.Core;
@@ -13,13 +12,13 @@ namespace PwnedPass2
 {
     public static class Cache
     {
-        public static async Task SaveData()
+        public static async Task SaveData(string url)
         {
             try
             {
                 HibpTotals data = new HibpTotals();
-                long acc = await GetAccounts();
-                int bre = await GetBreach();
+                long acc = await GetAccounts(url);
+                int bre = await GetBreach(url);
                 if (acc > 1)
                 {
                     data.TotalAccounts = acc;
@@ -36,7 +35,7 @@ namespace PwnedPass2
                     data.Id = 1;
                     App.Database.SaveHIBP(data);
                     App.Database.EmptyDataBreach();
-                    string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                    string result = await App.GetApi.GetHIBP(url);
                     if (result != null && result.Length > 0)
                     {
                         var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
@@ -54,14 +53,14 @@ namespace PwnedPass2
             }
         }
 
-        public static async Task<long> GetAccounts()
+        public static async Task<long> GetAccounts(string url)
         {
             var networkAccess = Connectivity.NetworkAccess;
             string result = null;
             long count = 0;
             if (networkAccess == NetworkAccess.Internet)
             {
-                result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                result = await App.GetApi.GetHIBP(url);
             }
             if (result != null && result.Length > 0)
             {
@@ -83,14 +82,14 @@ namespace PwnedPass2
             return count;
         }
 
-        public static async Task<int> GetBreach()
+        public static async Task<int> GetBreach(string url)
         {
             var networkAccess = Connectivity.NetworkAccess;
             string result = null;
             int count = 0;
             if (networkAccess == NetworkAccess.Internet)
             {
-                result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+                result = await App.GetApi.GetHIBP(url);
             }
             if (result != null && result.Length > 0)
             {

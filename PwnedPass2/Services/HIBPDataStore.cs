@@ -20,9 +20,9 @@ namespace PwnedPass2.Services
             return await Task.FromResult(items.FirstOrDefault(s => s.Name == id));
         }
 
-        public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, bool forceRefresh = false)
+        public async Task<IEnumerable<HIBP>> GetItemsAsync(string orderby, bool orderdir, string url, bool forceRefresh = false)
         {
-            string result = await App.GetApi.GetHIBP("https://haveibeenpwned.com/api/v3/breaches");
+            string result = await App.GetApi.GetHIBP(url);
             if (result != null && result.Length > 0)
             {
                 var job = JsonConvert.DeserializeObject<List<HIBP>>(result);
