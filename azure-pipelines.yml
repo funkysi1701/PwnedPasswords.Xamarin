@@ -134,7 +134,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: '
-        ($(Build.SourceVersionMessage).ToCharArray() | Select-Object -First 520) -join '' | Add-Content -Path $(Build.Repository.LocalPath)\release.txt -Encoding "utf8"'
+        ("$(Build.SourceVersionMessage)".ToCharArray() | Select-Object -First 520) -join '' | Add-Content -Path $(Build.Repository.LocalPath)\release.txt -Encoding "utf8"'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: release notes'
