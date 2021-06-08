@@ -130,7 +130,6 @@ stages:
         ArtifactName: AAB
 
     - task: PowerShell@2
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
       inputs:
         targetType: 'inline'
         script: '
