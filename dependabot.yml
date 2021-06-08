@@ -1,0 +1,23 @@
+name: $(BuildDefinitionName)-$(SourceBranchName)$(Rev:.r)-$(date:yyyyMMdd)
+
+trigger: none 
+
+schedules:
+- cron: '0 2 * * *' 
+  always: true 
+  branches:
+    include:
+      - develop
+  batch: true
+  displayName: Daily
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: dependabot@1
+  inputs:
+    packageManager: 'nuget'
+    versioningStrategy: 'auto'
+    azureDevOpsAccessToken: '$(ADOPAT)'
