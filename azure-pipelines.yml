@@ -8,6 +8,7 @@ trigger:
     - develop
     - master
     - feature/*
+    - renovate/*
 
 variables:
   Parameters.configuration: 'Release'
