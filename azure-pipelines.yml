@@ -64,15 +64,6 @@ stages:
         vstsFeed: '2c2a6a60-448c-4153-a1be-d2ce39bfbb0d'
         restoreDirectory: 'packages'
 
-    - task: SonarCloudPrepare@1 
-      inputs:
-        SonarCloud: 'SonarCloud'
-        organization: 'funkysi1701'
-        scannerMode: 'MSBuild'
-        projectKey: 'PwnedPass'
-        projectName: 'PwnedPass'
-        projectVersion: '$(Build.BuildId)'
-
     - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
       displayName: 'versionCode'
       inputs:
@@ -156,10 +147,4 @@ stages:
         createReport: true
         reportPath: '$(Build.ArtifactStagingDirectory)\dependencies.html'
       env:
-        SYSTEM_ACCESSTOKEN: $(system.accesstoken)     
-
-    - task: SonarCloudAnalyze@1
-
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'                
+        SYSTEM_ACCESSTOKEN: $(system.accesstoken)           

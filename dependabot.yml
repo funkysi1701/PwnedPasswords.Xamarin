@@ -21,3 +21,6 @@ steps:
     packageManager: 'nuget'
     versioningStrategy: 'auto'
     azureDevOpsAccessToken: '$(ADOPAT)'
+- task: RenovateMe@0
+  inputs:
+    renovateOptionsVersion: 'latest'
