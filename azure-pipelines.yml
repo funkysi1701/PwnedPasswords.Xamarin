@@ -135,16 +135,3 @@ stages:
     - task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@18
       displayName: 'WhiteSource Bolt'
 
-    - task: dependency-checker@1
-      inputs:
-        path: '$(Build.SourcesDirectory)'
-        searchRecursive: true
-        combineProjects: false
-        includePrerelease: false
-        useArtifacts: true
-        artifactsFeeds: '2c2a6a60-448c-4153-a1be-d2ce39bfbb0d'
-        createBadge: false
-        createReport: true
-        reportPath: '$(Build.ArtifactStagingDirectory)\dependencies.html'
-      env:
-        SYSTEM_ACCESSTOKEN: $(system.accesstoken)           
