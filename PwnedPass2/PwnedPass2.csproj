@@ -18,7 +18,7 @@
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Microsoft.AppCenter" Version="4.4.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.3.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PwnedPasswords.Core" Version="1.0.1-CI-20200516-210042" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
