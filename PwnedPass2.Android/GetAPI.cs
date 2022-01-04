@@ -69,7 +69,6 @@ namespace PwnedPass2.Android
             client.DefaultRequestHeaders.Add("AppName", AppInfo.Name);
             client.DefaultRequestHeaders.Add("PackageName", AppInfo.PackageName);
             client.DefaultRequestHeaders.Add("AppBuildString", AppInfo.BuildString);
-            client.DefaultRequestHeaders.Add("hibp-api-key", "404575e5c86c499fa4541e61acedbe4b");
             return client;
         }
 
