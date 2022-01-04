@@ -7,8 +7,6 @@ namespace PwnedPass2.Interfaces
     {
         void AddFooter(ItemsPage mainPage, StackLayout stack);
 
-        void AddFooter(EmailCheck mainPage, StackLayout stack);
-
         void AddFooter(PasswordCheck mainPage, StackLayout stack);
     }
 }

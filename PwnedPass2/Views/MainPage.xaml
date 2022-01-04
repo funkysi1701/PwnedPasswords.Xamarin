@@ -12,9 +12,9 @@
     </FlyoutPage.Flyout>
 
     <FlyoutPage.Detail>
-        <NavigationPage Title="Email Check">
+        <NavigationPage Title="Password Check">
             <x:Arguments>
-                <views:EmailCheck />
+                <views:PasswordCheck />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

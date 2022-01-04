@@ -33,9 +33,6 @@
     <Compile Update="Views\PasswordCheck.xaml.cs">
       <DependentUpon>PasswordCheck.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\EmailCheck.xaml.cs">
-      <DependentUpon>EmailCheck.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>

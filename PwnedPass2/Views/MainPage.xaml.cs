@@ -27,10 +27,6 @@ namespace PwnedPass2.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.EmailSearch:
-                        MenuPages.Add(id, new NavigationPage(new EmailCheck()));
-                        break;
-
                     case (int)MenuItemType.PasswordSearch:
                         MenuPages.Add(id, new NavigationPage(new PasswordCheck()));
                         break;
