@@ -71,7 +71,7 @@
                                           CommandParameter="https://www.funkysi1701.com/" />
                                 </Span.GestureRecognizers>
                             </Span>
-                            <Span Text=", who is a Developer working in the North of England. He has been working in IT departments for over 13 years and has a wide range of experience. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Large" />
+                            <Span Text=", who is a Developer working in the North of England. He has been working in IT departments since 2006 and has a wide range of experience. More recently in the Software Development space but also SysAdmin, Server Infrastructure and DevOps." FontSize="Large" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
