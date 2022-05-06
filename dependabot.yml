@@ -21,6 +21,7 @@ steps:
     packageManager: 'nuget'
     versioningStrategy: 'auto'
     azureDevOpsAccessToken: '$(ADOPAT)'
+    dockerImageTag: '0.5.19'
 - task: RenovateMe@0
   inputs:
     renovateOptionsVersion: 'latest'
