@@ -115,13 +115,13 @@ stages:
     - script: '$(Agent.TempDirectory)\zipalign3.bat'
       displayName: 'zipalign Script'
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishBuildArtifacts@1.200.0
       displayName: 'Publish Artifact: aab'
       inputs:
         PathtoPublish: 'PwnedPass2.Android/bin/$(Parameters.configuration)/PwnedPass2.Android-Signed.aab'
         ArtifactName: AAB
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishBuildArtifacts@1.200.0
       displayName: 'Publish Artifact: release notes'
       inputs:
         PathtoPublish: '$(Build.Repository.LocalPath)\release.txt'
