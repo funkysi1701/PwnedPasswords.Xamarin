@@ -34,15 +34,15 @@ stages:
        targetType: 'inline'
        script: 'Copy $(Build.SourcesDirectory)\PwnedPass2\Configuration-Source\Release\config.json $(Build.SourcesDirectory)\PwnedPass2\Configuration\config.json'       
 
-    - task: DownloadSecureFile@1
+    - task: DownloadSecureFile@1.200.0
       inputs:
         secureFile: simon2.keystore
 
-    - task: DownloadSecureFile@1
+    - task: DownloadSecureFile@1.200.0
       inputs:
         secureFile: zipalign2.bat
 
-    - task: DownloadSecureFile@1
+    - task: DownloadSecureFile@1.200.0
       inputs:
         secureFile: zipalign3.bat
 
