@@ -93,7 +93,7 @@ stages:
         buildRegexIndex: 1
         replacePrefix: 'versionName="3.'
 
-    - task: XamarinAndroid@1
+    - task: XamarinAndroid@1.208.0
       displayName: 'Build Xamarin.Android'
       inputs:
         projectFile: 'PwnedPass2.Android/PwnedPass2.Android.csproj'
