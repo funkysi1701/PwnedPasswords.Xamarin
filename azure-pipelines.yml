@@ -127,6 +127,3 @@ stages:
         PathtoPublish: '$(Build.Repository.LocalPath)\release.txt'
         ArtifactName: release
 
-    - task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@18
-      displayName: 'WhiteSource Bolt'
-
