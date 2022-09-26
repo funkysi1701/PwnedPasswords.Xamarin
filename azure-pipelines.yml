@@ -51,7 +51,7 @@ stages:
       workingDirectory: '$(Build.SourcesDirectory)/PwnedPass2'
       failOnStderr: true
 
-    - task: NuGetToolInstaller@0
+    - task: NuGetToolInstaller@1.208.1
       displayName: 'Install Nuget'
       inputs:
         versionSpec: 4.9.2
