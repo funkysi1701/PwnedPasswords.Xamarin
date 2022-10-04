@@ -93,7 +93,7 @@ stages:
         buildRegexIndex: 1
         replacePrefix: 'versionName="3.'
 
-    - task: XamarinAndroid@1.208.0
+    - task: XamarinAndroid@1
       displayName: 'Build Xamarin.Android'
       inputs:
         projectFile: 'PwnedPass2.Android/PwnedPass2.Android.csproj'
@@ -102,6 +102,7 @@ stages:
         msbuildVersionOption: 'latest'
         msbuildArchitectureOption: 'x64'
         jdkOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
 
     - powershell: |
         $temp = Get-ChildItem $(Build.Repository.LocalPath)\PwnedPass2.Android\obj\$(Parameters.configuration) | Select name
