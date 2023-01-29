@@ -8,8 +8,8 @@ https://www.funkysi1701.com/pwned-pass/
 
 [![Board Status](https://dev.azure.com/funkysi1701/e2329829-2954-44cc-8785-ea8c96b5e378/e99d9bb9-517f-436c-81b1-2e09b5a80650/_apis/work/boardbadge/29d03555-6a29-4d27-a51b-0b56d71bfaa2)](https://dev.azure.com/funkysi1701/e2329829-2954-44cc-8785-ea8c96b5e378/_boards/board/t/e99d9bb9-517f-436c-81b1-2e09b5a80650/Microsoft.RequirementCategory)
 
-<p><a href="https://play.google.com/store/apps/details?id=pwnedpasswords.pwnedpasswords"><img class="alignleft wp-image-2204 size-medium" src="https://www.funkysi1701.com/wp-content/uploads/2019/04/playstore-1-300x90.png" alt="" style="height: 50px;border-radius: 8px;"></a></p>
-<p><a href="https://www.microsoft.com/store/apps/9NM2WHNZTNLT"><img class="alignleft wp-image-2210 size-medium" src="https://www.funkysi1701.com/wp-content/uploads/2019/04/badge-wp-300x108.png" alt="" style="height: 50px;border-radius: 8px;"></a></p>
+<p><a href="https://play.google.com/store/apps/details?id=pwnedpasswords.pwnedpasswords"><img class="alignleft wp-image-2204 size-medium" src="https://storageaccountblog9f5d.blob.core.windows.net/blazor/wp-content/uploads/2019/04/playstore-1-300x90.png" alt="" style="height: 50px;border-radius: 8px;"></a></p>
+<p><a href="https://www.microsoft.com/store/apps/9NM2WHNZTNLT"><img class="alignleft wp-image-2210 size-medium" src="https://storageaccountblog9f5d.blob.core.windows.net/blazor/wp-content/uploads/2019/04/badge-wp-300x108.png" alt="" style="height: 50px;border-radius: 8px;"></a></p>
 
 #GitHub
 
