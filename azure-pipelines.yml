@@ -62,7 +62,6 @@ stages:
         command: 'restore'
         restoreSolution: 'PwnedPass2.sln'
         feedsToUse: 'select'
-        vstsFeed: '2c2a6a60-448c-4153-a1be-d2ce39bfbb0d'
         restoreDirectory: 'packages'
 
     - task: colinsalmcorner.colinsalmcorner-buildtasks.version-assemblies-task.VersionAssemblies@2
